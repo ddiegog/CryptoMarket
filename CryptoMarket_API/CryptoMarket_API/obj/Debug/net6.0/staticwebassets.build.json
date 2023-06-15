@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "HQj8nG9AMY0Q2kocuZMZvB4K7yImU57mIME7datTFfw=",
+  "Source": "CryptoMarket_API",
+  "BasePath": "_content/CryptoMarket_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
