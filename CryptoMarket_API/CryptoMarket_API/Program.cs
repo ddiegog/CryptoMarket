@@ -1,3 +1,4 @@
+using CryptoMarket_API.ApiResponse;
 using DataAccess.DBEntities;
 using Logic;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +11,19 @@ builder.Services.AddDbContextFactory<DataAccess.DBEntities.CryptoMarketContext>(
     options.UseSqlServer(builder.Configuration.GetConnectionString("CryptoMarketConnection"),
     sqlServerOptionsAction: sqlOptions =>
     {
-        sqlOptions.EnableRetryOnFailure(maxRetryCount: 2);
+        sqlOptions.EnableRetryOnFailure(maxRetryCount: 1);
     })
 );
 
 
 builder.Services.AddScoped<DataAccess.RepositoryFactory>();
 builder.Services.AddScoped<LogicFactory>();
+builder.Services.AddScoped<ApiResponseActionFilter>();
+
+//builder.Services.AddControllers(options =>
+//{
+//    options.Filters.Add<ApiResponseActionFilter>();
+//});
 
 builder.Services.AddControllers();
 

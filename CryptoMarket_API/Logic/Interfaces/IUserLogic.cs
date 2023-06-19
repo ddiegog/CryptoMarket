@@ -10,7 +10,7 @@ namespace Logic.Interfaces
     public interface IUserLogic
     {
         public User? GetUser(string wallet);
-        public User GetUsers();
+        public List<User> GetUsers(string nick, int level, int pageNumber, int pageSize);
         public User AddUser();
         public User UpdateUser();
         public bool Deleteuser();

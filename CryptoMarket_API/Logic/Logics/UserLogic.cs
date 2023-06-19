@@ -4,6 +4,7 @@ using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,9 +45,9 @@ namespace Logic.Logics
             return _repository.UserRepository().GetUser(wallet);
         }
 
-        public User GetUsers()
+        public List<User> GetUsers(string nick, int level, int pageNumber, int pageSize)
         {
-            throw new NotImplementedException();
+            return _repository.UserRepository().GetUsers(nick, level, pageNumber, pageSize);
         }
 
         public User UpdateUser()

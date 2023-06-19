@@ -1,4 +1,6 @@
 ﻿
+using Azure;
+using CryptoMarket_API.ApiResponse;
 using DataAccess.DBEntities;
 using Logic;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +19,6 @@ namespace CryptoMarket_API.Controllers
             _logicFactory = logicFactory;
         }
 
-        [HttpGet]
-        public IActionResult Get() {
-            return Ok(new { status = "Ok" });
-        }
-
         [HttpGet("{wallet}")]
         public IActionResult Get(string wallet) 
         {
@@ -29,15 +26,26 @@ namespace CryptoMarket_API.Controllers
             {
                 User? user = _logicFactory.GetUserLogic().GetUser(wallet);
 
-                if (user == null)
-                    return NotFound();
-
                 return Ok(user);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { Error = "Ha ocurrido un error " + ex.Message });
             }
+        }
+
+        [HttpGet()]
+        [ServiceFilter(typeof(ApiResponseActionFilter))]
+        public List<User> GetUsers([FromQuery] UserFilter filtros)
+        {
+            string nick = filtros?.Nick ?? string.Empty;
+            int level = filtros?.Level ?? -1;
+            int pageNumber = filtros?.PageNumber ?? -1;
+            int pageSize = filtros?.PageSize ?? -1;
+
+            List<User> users = _logicFactory.GetUserLogic().GetUsers(nick, level, pageNumber, pageSize);
+
+            return users;
         }
 
         [HttpPost]
@@ -54,4 +62,13 @@ namespace CryptoMarket_API.Controllers
         }
 
     }
+
+    public class UserFilter
+    {
+        public string Nick { get; set; }
+        public int? Level { get; set; }
+        public int? PageNumber { get; set; }
+        public int? PageSize { get; set; }
+    }
+
 }
