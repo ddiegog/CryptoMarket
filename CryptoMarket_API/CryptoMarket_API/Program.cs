@@ -1,3 +1,4 @@
+using DataAccess.DBEntities;
 using Logic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -5,8 +6,14 @@ using Microsoft.Extensions.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DataAccess.DBEntities.CryptoMarketContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CryptoMarketConnection")));
+builder.Services.AddDbContextFactory<DataAccess.DBEntities.CryptoMarketContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CryptoMarketConnection"),
+    sqlServerOptionsAction: sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(maxRetryCount: 2);
+    })
+);
+
 
 builder.Services.AddScoped<DataAccess.RepositoryFactory>();
 builder.Services.AddScoped<LogicFactory>();

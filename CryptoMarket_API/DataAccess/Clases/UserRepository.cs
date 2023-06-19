@@ -1,5 +1,7 @@
 ﻿using DataAccess.DBEntities;
 using DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,10 @@ namespace DataAccess.Clases
 {
     public class UserRepository : IUserRepository
     {
-        private readonly CryptoMarketContext _context;
-        public UserRepository(CryptoMarketContext context)
+        private readonly IDbContextFactory<CryptoMarketContext> _context;
+        public UserRepository(IDbContextFactory<CryptoMarketContext> contextFactory)
         {
-            _context = context;
+            _context = contextFactory;
         }
 
         public User AddUser()
@@ -28,7 +30,10 @@ namespace DataAccess.Clases
 
         public User? GetUser(string wallet)
         {
-            return _context.Users.SingleOrDefault(u => u.Wallet == wallet);
+            using (var context = _context.CreateDbContext())
+            {
+                return context.Users.SingleOrDefault(u => u.Wallet == wallet);
+            }
         }
 
         public User GetUsers()

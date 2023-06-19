@@ -11,9 +11,9 @@ namespace DataAccess
 {
     public class RepositoryFactory
     {
-        private readonly CryptoMarketContext _context;
+        private readonly IDbContextFactory<CryptoMarketContext> _context;
 
-        public RepositoryFactory(CryptoMarketContext context) 
+        public RepositoryFactory(IDbContextFactory<CryptoMarketContext> context) 
             => _context = context;
 
         public UserRepository UserRepository() => new UserRepository(_context);
