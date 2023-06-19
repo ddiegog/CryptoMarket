@@ -1257,11 +1257,22 @@
           "bin/placeholder/DataAccess.dll": {}
         }
       },
+      "Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entities.dll": {}
+        }
+      },
       "Logic/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "DataAccess": "1.0.0"
+          "DataAccess": "1.0.0",
+          "Entities": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Logic.dll": {}
@@ -3750,6 +3761,11 @@
       "path": "../DataAccess/DataAccess.csproj",
       "msbuildProject": "../DataAccess/DataAccess.csproj"
     },
+    "Entities/1.0.0": {
+      "type": "project",
+      "path": "../Entities/Entities.csproj",
+      "msbuildProject": "../Entities/Entities.csproj"
+    },
     "Logic/1.0.0": {
       "type": "project",
       "path": "../Logic/Logic.csproj",
@@ -3758,6 +3774,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Entities >= 1.0.0",
       "Logic >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.7",
       "Newtonsoft.Json >= 13.0.3",
@@ -3800,6 +3817,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\Entities\\Entities.csproj": {
+              "projectPath": "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\Entities\\Entities.csproj"
+            },
             "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\Logic\\Logic.csproj": {
               "projectPath": "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\Logic\\Logic.csproj"
             }

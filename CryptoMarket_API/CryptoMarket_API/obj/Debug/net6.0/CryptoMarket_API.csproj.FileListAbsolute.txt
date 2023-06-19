@@ -181,3 +181,5 @@ D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\CryptoMarket_API\obj\De
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\CryptoMarket_API\obj\Debug\net6.0\CryptoMarket_API.genruntimeconfig.cache
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\CryptoMarket_API\obj\Debug\net6.0\ref\CryptoMarket_API.dll
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\CryptoMarket_API\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\CryptoMarket_API\bin\Debug\net6.0\Entities.dll
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\CryptoMarket_API\bin\Debug\net6.0\Entities.pdb

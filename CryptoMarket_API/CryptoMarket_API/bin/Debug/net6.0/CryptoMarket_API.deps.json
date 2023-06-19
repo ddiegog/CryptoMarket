@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "CryptoMarket_API/1.0.0": {
         "dependencies": {
+          "Entities": "1.0.0",
           "Logic": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "7.0.7",
           "Newtonsoft.Json": "13.0.3",
@@ -758,9 +759,15 @@
           "DataAccess.dll": {}
         }
       },
+      "Entities/1.0.0": {
+        "runtime": {
+          "Entities.dll": {}
+        }
+      },
       "Logic/1.0.0": {
         "dependencies": {
-          "DataAccess": "1.0.0"
+          "DataAccess": "1.0.0",
+          "Entities": "1.0.0"
         },
         "runtime": {
           "Logic.dll": {}
@@ -1293,6 +1300,11 @@
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
     },
     "DataAccess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Entities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

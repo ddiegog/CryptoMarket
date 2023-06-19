@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "Logic/1.0.0": {
         "dependencies": {
-          "DataAccess": "1.0.0"
+          "DataAccess": "1.0.0",
+          "Entities": "1.0.0"
         },
         "runtime": {
           "Logic.dll": {}
@@ -617,6 +618,11 @@
         "runtime": {
           "DataAccess.dll": {}
         }
+      },
+      "Entities/1.0.0": {
+        "runtime": {
+          "Entities.dll": {}
+        }
       }
     }
   },
@@ -1061,6 +1067,11 @@
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
     },
     "DataAccess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Entities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

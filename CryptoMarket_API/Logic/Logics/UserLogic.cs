@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.DBEntities;
+using Entities.DTO;
 using Logic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -35,19 +36,50 @@ namespace Logic.Logics
             throw new NotImplementedException();
         }
 
-        public bool Deleteuser()
+        public bool DeleteUser(string wallet)
         {
-            throw new NotImplementedException();
+            var user = _repository.UserRepository().GetUser(wallet);
+
+            if (user == null) return false;
+
+            _repository.UserRepository().DeleteUser(user);
+            return true;
         }
 
-        public User? GetUser(string wallet)
+        public UserDTO? GetUser(string wallet)
         {
-            return _repository.UserRepository().GetUser(wallet);
+            var user = _repository.UserRepository().GetUser(wallet);
+            UserDTO userDTO = null;
+
+            if (user != null) {
+                userDTO = new UserDTO()
+                {
+                    Wallet = user.Wallet,
+                    Nick = user.Nick,
+                    Image = user.Img,
+                    LastLogin = user.LastLogin,
+                    Level = user.Level
+                };
+            }
+            
+            return userDTO;
+
         }
 
-        public List<User> GetUsers(string nick, int level, int pageNumber, int pageSize)
+        public List<UserDTO> GetUsers(string nick, int level, int pageNumber, int pageSize)
         {
-            return _repository.UserRepository().GetUsers(nick, level, pageNumber, pageSize);
+            var users = _repository.UserRepository().GetUsers(nick, level, pageNumber, pageSize);
+
+            var usersDTO = new List<UserDTO>();
+            usersDTO = users.ConvertAll(x => new UserDTO() { 
+                Wallet = x.Wallet,
+                Nick = x.Nick,
+                Image = x.Img,
+                LastLogin = x.LastLogin,
+                Level = x.Level
+            });
+
+            return usersDTO;
         }
 
         public User UpdateUser()

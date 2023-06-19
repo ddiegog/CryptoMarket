@@ -15,6 +15,8 @@ public partial class User
 
     public int? Level { get; set; }
 
+    public bool? Active { get; set; }
+
     public virtual ICollection<Transaction> TransactionFromWalletNavigations { get; set; } = new List<Transaction>();
 
     public virtual ICollection<Transaction> TransactionToWalletNavigations { get; set; } = new List<Transaction>();

@@ -10,7 +10,7 @@ namespace CryptoMarket_API.ApiResponse
             ApiResponse<object> response = new ApiResponse<object>();
             context.HttpContext.Items["ApiResponse"] = response;
         }
-
+         
         public void OnActionExecuted(ActionExecutedContext context)
         {
             if (context.Exception != null)
@@ -21,7 +21,7 @@ namespace CryptoMarket_API.ApiResponse
                     Error = context.Exception.Message
                 };
 
-                context.Result = new ObjectResult(apiResponse) { StatusCode = 500 };
+                context.Result = new ObjectResult(apiResponse) { StatusCode = 200 };
                 context.ExceptionHandled = true;
             }
             else if (context.Result is ObjectResult objectResult)

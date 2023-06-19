@@ -2,6 +2,8 @@
 using Azure;
 using CryptoMarket_API.ApiResponse;
 using DataAccess.DBEntities;
+using Entities.DTO;
+using Entities.Filters;
 using Logic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,7 @@ namespace CryptoMarket_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [ServiceFilter(typeof(ApiResponseActionFilter))]
     public class UsersController : ControllerBase
     {
 
@@ -20,32 +23,35 @@ namespace CryptoMarket_API.Controllers
         }
 
         [HttpGet("{wallet}")]
-        public IActionResult Get(string wallet) 
+        public UserDTO? Get(string wallet)
         {
-            try
-            {
-                User? user = _logicFactory.GetUserLogic().GetUser(wallet);
+            if (string.IsNullOrEmpty(wallet)) return null;
 
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Error = "Ha ocurrido un error " + ex.Message });
-            }
+            var user = _logicFactory.GetUserLogic().GetUser(wallet);
+
+            return user;
         }
 
         [HttpGet()]
-        [ServiceFilter(typeof(ApiResponseActionFilter))]
-        public List<User> GetUsers([FromQuery] UserFilter filtros)
+        public List<UserDTO> GetUsers([FromQuery] UsersFilter filtros)
         {
-            string nick = filtros?.Nick ?? string.Empty;
-            int level = filtros?.Level ?? -1;
-            int pageNumber = filtros?.PageNumber ?? -1;
-            int pageSize = filtros?.PageSize ?? -1;
 
-            List<User> users = _logicFactory.GetUserLogic().GetUsers(nick, level, pageNumber, pageSize);
+            string nick = filtros.GetValue<string>("Nick", string.Empty);
+            int level = filtros.GetValue<int>("Level", -1);
+            int pageNumber = filtros.GetValue<int>("PageNumber", -1);
+            int pageSize = filtros.GetValue<int>("PageNumber", -1);
+
+            List<UserDTO> users = _logicFactory.GetUserLogic().GetUsers(nick, level, pageNumber, pageSize);
 
             return users;
+        }
+
+        [HttpDelete("{wallet}")]
+        public bool Delete(string wallet)
+        {
+            if (string.IsNullOrEmpty(wallet)) return false;
+
+            return _logicFactory.GetUserLogic().DeleteUser(wallet);
         }
 
         [HttpPost]
@@ -61,14 +67,6 @@ namespace CryptoMarket_API.Controllers
             }
         }
 
-    }
-
-    public class UserFilter
-    {
-        public string Nick { get; set; }
-        public int? Level { get; set; }
-        public int? PageNumber { get; set; }
-        public int? PageSize { get; set; }
     }
 
 }

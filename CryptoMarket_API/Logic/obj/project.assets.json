@@ -1059,6 +1059,16 @@
         "runtime": {
           "bin/placeholder/DataAccess.dll": {}
         }
+      },
+      "Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entities.dll": {}
+        }
       }
     }
   },
@@ -3233,11 +3243,17 @@
       "type": "project",
       "path": "../DataAccess/DataAccess.csproj",
       "msbuildProject": "../DataAccess/DataAccess.csproj"
+    },
+    "Entities/1.0.0": {
+      "type": "project",
+      "path": "../Entities/Entities.csproj",
+      "msbuildProject": "../Entities/Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "DataAccess >= 1.0.0"
+      "DataAccess >= 1.0.0",
+      "Entities >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3277,6 +3293,9 @@
           "projectReferences": {
             "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\DataAccess\\DataAccess.csproj": {
               "projectPath": "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\DataAccess\\DataAccess.csproj"
+            },
+            "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\Entities\\Entities.csproj": {
+              "projectPath": "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\Entities\\Entities.csproj"
             }
           }
         }

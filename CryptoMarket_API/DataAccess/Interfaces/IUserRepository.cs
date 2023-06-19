@@ -13,6 +13,6 @@ namespace DataAccess.Interfaces
         public List<User> GetUsers(string nick, int level, int pageNumber, int pageSize);
         public User AddUser();
         public User UpdateUser();
-        public bool Deleteuser();
+        public void DeleteUser(User user);
     }
 }

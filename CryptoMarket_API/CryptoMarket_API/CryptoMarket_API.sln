@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoMarket_API", "CryptoMarket_API.csproj", "{CD3920C3-5404-4BB2-AEE4-9A7F85C7D2CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoMarket_API", "CryptoMarket_API.csproj", "{CD3920C3-5404-4BB2-AEE4-9A7F85C7D2CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "..\DataAccess\DataAccess.csproj", "{06BDC09F-3322-4E6F-9766-FAB6ED1711C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "..\DataAccess\DataAccess.csproj", "{06BDC09F-3322-4E6F-9766-FAB6ED1711C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "..\Logic\Logic.csproj", "{72E7AA9E-1B66-4625-8C6B-78B7EA4EEB6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "..\Logic\Logic.csproj", "{72E7AA9E-1B66-4625-8C6B-78B7EA4EEB6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "..\Entities\Entities.csproj", "{76310EB9-A04B-4E8F-A91F-374786BFEDDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{72E7AA9E-1B66-4625-8C6B-78B7EA4EEB6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72E7AA9E-1B66-4625-8C6B-78B7EA4EEB6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72E7AA9E-1B66-4625-8C6B-78B7EA4EEB6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76310EB9-A04B-4E8F-A91F-374786BFEDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76310EB9-A04B-4E8F-A91F-374786BFEDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76310EB9-A04B-4E8F-A91F-374786BFEDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76310EB9-A04B-4E8F-A91F-374786BFEDDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

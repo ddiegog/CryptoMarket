@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.DBEntities;
 
 public partial class CryptoMarketContext : DbContext
 {
-    private IConfiguration _configuration; 
-    
-    public CryptoMarketContext(DbContextOptions<CryptoMarketContext> options, IConfiguration configuration)
+    public CryptoMarketContext()
+    {
+    }
+
+    public CryptoMarketContext(DbContextOptions<CryptoMarketContext> options)
         : base(options)
     {
-        _configuration = configuration;
     }
 
     public virtual DbSet<GenericType> GenericTypes { get; set; }
@@ -22,12 +22,6 @@ public partial class CryptoMarketContext : DbContext
     public virtual DbSet<Transaction> Transactions { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        string? connectionString = _configuration.GetConnectionString("CryptoMarketConnection");
-        optionsBuilder.UseSqlServer(connectionString);
-    } 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -78,6 +72,9 @@ public partial class CryptoMarketContext : DbContext
             entity.Property(e => e.Wallet)
                 .HasMaxLength(40)
                 .IsUnicode(false);
+            entity.Property(e => e.Active)
+                .IsRequired()
+                .HasDefaultValueSql("((1))");
             entity.Property(e => e.Img)
                 .HasMaxLength(100)
                 .IsUnicode(false);

@@ -23,16 +23,21 @@ namespace DataAccess.Clases
             throw new NotImplementedException();
         }
 
-        public bool Deleteuser()
+        public void DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            using (var context = _context.CreateDbContext())
+            {
+                user.Active = false;
+                context.Users.Update(user);
+                context.SaveChanges();
+            }
         }
 
         public User? GetUser(string wallet)
         {
             using (var context = _context.CreateDbContext())
             {
-                return context.Users.SingleOrDefault(u => u.Wallet == wallet);
+                return context.Users.SingleOrDefault(u => u.Wallet == wallet && (bool)u.Active);
             }
         }
 
@@ -41,6 +46,8 @@ namespace DataAccess.Clases
             using (var context = _context.CreateDbContext())
             {
                 var query = context.Users.AsQueryable();
+
+                query = query.Where(u => u.Active == true);
 
                 if (level != -1)
                 {

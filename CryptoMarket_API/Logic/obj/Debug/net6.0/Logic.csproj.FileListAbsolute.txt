@@ -28,3 +28,5 @@ D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\refint\Logic.dll
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\Logic.pdb
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\ref\Logic.dll
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Entities.dll
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Entities.pdb
