@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.DBEntities;
+namespace CryptoMarket_API.DBEntities;
 
 public partial class CryptoMarketContext : DbContext
 {
@@ -23,6 +23,7 @@ public partial class CryptoMarketContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<GenericType>(entity =>
@@ -46,7 +47,7 @@ public partial class CryptoMarketContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Transact__3214EC0784C6166A");
 
-            entity.Property(e => e.Date).HasColumnType("datetime2");
+            entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.FromWallet)
                 .HasMaxLength(40)
                 .IsUnicode(false);
@@ -78,7 +79,7 @@ public partial class CryptoMarketContext : DbContext
             entity.Property(e => e.Img)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.LastLogin).HasColumnType("datetime2");
+            entity.Property(e => e.LastLogin).HasColumnType("datetime");
             entity.Property(e => e.Level).HasDefaultValueSql("((0))");
             entity.Property(e => e.Nick).HasMaxLength(20);
         });

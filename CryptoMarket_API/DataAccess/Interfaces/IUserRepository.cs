@@ -9,10 +9,10 @@ namespace DataAccess.Interfaces
 {
     public interface IUserRepository
     {
-        public User? GetUser(string wallet);
+        public User? GetUser(string wallet, bool active);
         public List<User> GetUsers(string nick, int level, int pageNumber, int pageSize);
-        public User AddUser();
-        public User UpdateUser();
+        public User AddUser(string wallet);
+        public User UpdateUser(User user);
         public void DeleteUser(User user);
     }
 }

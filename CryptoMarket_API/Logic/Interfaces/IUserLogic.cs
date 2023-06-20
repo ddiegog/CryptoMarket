@@ -1,4 +1,5 @@
 ﻿using DataAccess.DBEntities;
+using Entities;
 using Entities.DTO;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Logic.Interfaces
     {
         public UserDTO? GetUser(string wallet);
         public List<UserDTO> GetUsers(string nick, int level, int pageNumber, int pageSize);
-        public User AddUser();
+        public AuthLogin LoginRegister(Login login);
         public User UpdateUser();
         public bool DeleteUser(string wallet);
 

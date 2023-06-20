@@ -18,4 +18,8 @@
     <Folder Include="DBEntities\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blockchain\Blockchain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -18,9 +18,16 @@ namespace DataAccess.Clases
             _context = contextFactory;
         }
 
-        public User AddUser()
+        public User AddUser(string wallet)
         {
-            throw new NotImplementedException();
+            using (var context = _context.CreateDbContext())
+            {
+                var user = new User { Wallet = wallet, Active = true, LastLogin = DateTime.Now };
+                user = context.Users.Add(user).Entity;
+                context.SaveChanges();
+
+                return user;
+            }
         }
 
         public void DeleteUser(User user)
@@ -33,11 +40,14 @@ namespace DataAccess.Clases
             }
         }
 
-        public User? GetUser(string wallet)
+        public User? GetUser(string wallet, bool active = true)
         {
             using (var context = _context.CreateDbContext())
             {
-                return context.Users.SingleOrDefault(u => u.Wallet == wallet && (bool)u.Active);
+                var query = context.Users.AsQueryable();
+                if(active) query = query.Where(u => u.Active);
+
+                return query.SingleOrDefault(u => u.Wallet == wallet);
             }
         }
 
@@ -70,9 +80,15 @@ namespace DataAccess.Clases
         }
 
 
-        public User UpdateUser()
+        public User UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            using (var context = _context.CreateDbContext())
+            {
+                context.Users.Update(user);
+                context.SaveChanges();
+
+                return user;
+            }
         }
     }
 }

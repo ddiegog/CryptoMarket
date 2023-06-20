@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.DBEntities;
+using Entities;
 using Entities.DTO;
 using Logic.Interfaces;
 using System;
@@ -29,11 +30,6 @@ namespace Logic.Logics
         private UserLogic(RepositoryFactory repository)
         {
             _repository = repository;
-        }
-
-        public User AddUser()
-        {
-            throw new NotImplementedException();
         }
 
         public bool DeleteUser(string wallet)
@@ -85,6 +81,30 @@ namespace Logic.Logics
         public User UpdateUser()
         {
             throw new NotImplementedException();
+        }
+
+        public AuthLogin LoginRegister(Login login)
+        {
+            if (string.IsNullOrEmpty(login.Wallet))
+                throw new Exception("Logic: There is no wallet");
+
+            var user = _repository.UserRepository().GetUser(login.Wallet, false);
+
+            if (user == null)
+            {
+                user = _repository.UserRepository().AddUser(login.Wallet);
+            }
+
+            user.Active = true;
+            user.LastLogin = DateTime.Now;
+            user = _repository.UserRepository().UpdateUser(user);
+
+
+            // validate login
+
+
+            return new AuthLogin { Token = user.Wallet + " - test" };
+            
         }
     }
 }

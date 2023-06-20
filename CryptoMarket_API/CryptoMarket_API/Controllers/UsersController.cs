@@ -2,6 +2,7 @@
 using Azure;
 using CryptoMarket_API.ApiResponse;
 using DataAccess.DBEntities;
+using Entities;
 using Entities.DTO;
 using Entities.Filters;
 using Logic;
@@ -55,16 +56,12 @@ namespace CryptoMarket_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult LogInRegister([FromBody] string wallet)
+        public AuthLogin LogInRegister([FromBody] Login login)
         {
-            // Validar si existe
-            if (false)
-            {
-                return Ok(new { status = "Ok" });
-            }
-            else {
-                return Created(nameof(Get),new { status = "Created" });
-            }
+            var auth = _logicFactory.GetUserLogic().LoginRegister(login);
+
+            return auth;
+
         }
 
     }

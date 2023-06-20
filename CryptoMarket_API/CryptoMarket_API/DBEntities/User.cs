@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccess.DBEntities;
+namespace CryptoMarket_API.DBEntities;
 
 public partial class User
 {
@@ -15,7 +15,7 @@ public partial class User
 
     public int? Level { get; set; }
 
-    public bool Active { get; set; }
+    public bool? Active { get; set; }
 
     public virtual ICollection<Transaction> TransactionFromWalletNavigations { get; set; } = new List<Transaction>();
 
