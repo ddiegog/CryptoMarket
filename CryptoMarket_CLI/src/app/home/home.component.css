@@ -1,0 +1,27 @@
+.custom-container {
+    background-color: #f4f6f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-navbar {
+    background-color: #2C3E50;
+}
+
+.title-text {
+    color: #4a4a4a;
+}
+
+.floating-gif {
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+}
