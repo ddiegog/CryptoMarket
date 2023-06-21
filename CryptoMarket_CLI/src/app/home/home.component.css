@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 90px);
     padding: 0;
     margin: 0;
 }
@@ -19,6 +19,23 @@
 .floating-gif {
     border-radius: 15px;
 }
+
+.connect-text {
+    animation: pulsate 3s infinite;
+  }
+  
+  @keyframes pulsate {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
 
 @media screen and (max-width: 600px) {
     .row {

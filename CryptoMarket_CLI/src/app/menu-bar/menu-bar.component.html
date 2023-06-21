@@ -19,14 +19,11 @@
         </ul>
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle balance-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="ruta-al-logo-balance.png" width="20" height="20" alt="Balance Logo"> Balance
+                <a class="nav-link balance-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/assets/img/balance-logo.png" width="20" height="20" alt="Balance Logo"> $
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- Opciones del menú desplegable -->
-                </div>
             </div>
-            <a class="nav-link connect-wallet-link" href="#">Connect Wallet</a>
+            <div class="nav-link connect-wallet-link custom-highlight" (click)="connectWallet()">Connect Wallet</div>
         </div>
     </div>
 </nav>

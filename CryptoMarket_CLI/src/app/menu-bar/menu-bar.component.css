@@ -3,6 +3,12 @@
     /*border-radius: 10px;*/
 }
 
+.custom-highlight {
+    background-color: #32d4e5; 
+    color: #32d4e5; 
+    border-radius: 10px;
+}
+  
 .custom-navbar .nav-link {
     color: #FFFFFF;
 }
@@ -18,3 +24,6 @@
 .connect-wallet-link {
     color: #FFFFFF;
 }
+.connect-wallet-link:hover {
+    cursor: pointer;
+  }

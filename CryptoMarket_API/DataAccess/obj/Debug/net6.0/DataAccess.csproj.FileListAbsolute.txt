@@ -26,3 +26,6 @@ D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\DataAccess\obj\Debug\ne
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\DataAccess\obj\Debug\net6.0\DataAccess.pdb
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\DataAccess\obj\Debug\net6.0\DataAccess.genruntimeconfig.cache
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\DataAccess\obj\Debug\net6.0\ref\DataAccess.dll
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\DataAccess\bin\Debug\net6.0\Blockchain.dll
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\DataAccess\bin\Debug\net6.0\Blockchain.pdb
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\DataAccess\obj\Debug\net6.0\DataAccess.csproj.CopyComplete
