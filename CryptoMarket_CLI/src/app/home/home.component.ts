@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonService } from '../common.service';
-
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +13,10 @@ export class HomeComponent {
   connectMetamask():void {
 
     this.commonData.connectMetamask()
-    .then(account => {
+    .then((account:any) => {
       alert('Connected with account: '+ account);
     })
-    .catch(error => {
+    .catch((error:any) => {
       alert('Failed to connect: '+ error);
     });
 
