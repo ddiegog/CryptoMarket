@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data-service.service';
+import { RouterModule } from '@angular/router';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -7,14 +9,18 @@ import { DataService } from '../data-service.service';
   styleUrls: ['./menu-bar.component.css']
 })
 export class MenuBarComponent {
-  constructor(private data: DataService){}
+  constructor(private data: DataService, private commonData: CommonService){}
 
-  connectWallet():void{
-    
-    //TEST
-    this.data.getUser('asdf').subscribe(
-      (response:any) => console.log(response),
-      (error:any) => console.log(error));
+  connectMetamask():void {
+
+    this.commonData.connectMetamask()
+    .then(account => {
+      alert('Connected with account: '+ account);
+    })
+    .catch(error => {
+      alert('Failed to connect: '+ error);
+    });
 
   }
+
 }

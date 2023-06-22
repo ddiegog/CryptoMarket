@@ -11,6 +11,12 @@
   
 .custom-navbar .nav-link {
     color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.custom-navbar .nav-link[routerLink]:active {
+    background-color: #6fabc357;
+    border-radius: 10px;
 }
 
 .custom-navbar .navbar-toggler {

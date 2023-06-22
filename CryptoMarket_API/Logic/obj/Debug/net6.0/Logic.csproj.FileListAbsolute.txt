@@ -16,8 +16,12 @@ D:\Proyectos Visual Studio\CryptoMarket\Logic\obj\Debug\net6.0\ref\Logic.dll
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Logic.deps.json
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Logic.dll
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Logic.pdb
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Blockchain.dll
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\DataAccess.dll
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Entities.dll
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\DataAccess.pdb
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Entities.pdb
+D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Blockchain.pdb
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\Logic.csproj.AssemblyReference.cache
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\Logic.GeneratedMSBuildEditorConfig.editorconfig
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\Logic.AssemblyInfoInputs.cache
@@ -28,7 +32,3 @@ D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\refint\Logic.dll
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\Logic.pdb
 D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\obj\Debug\net6.0\ref\Logic.dll
-D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Entities.dll
-D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Entities.pdb
-D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Blockchain.dll
-D:\Proyectos Visual Studio\CryptoMarket\CryptoMarket_API\Logic\bin\Debug\net6.0\Blockchain.pdb

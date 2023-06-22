@@ -1,29 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="home">
         <img src="assets/img/logo.png" height="30" alt="Logo">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" >
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Transfer</a>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:;" routerLink="transfer" routerLinkActive="active">Transfer</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">NFTs</a>
+                <a class="nav-link" href="javascript:;" routerLink="nfts" routerLinkActive="active">NFTs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Game</a>
+                <a class="nav-link" href="javascript:;" routerLink="game" routerLinkActive="active">Game</a>
             </li>
         </ul>
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
                 <a class="nav-link balance-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="/assets/img/balance-logo.png" width="20" height="20" alt="Balance Logo"> $
+                    <img src="/assets/img/balance-logo.png" width="20" height="20"> $
                 </a>
             </div>
-            <div class="nav-link connect-wallet-link custom-highlight" (click)="connectWallet()">Connect Wallet</div>
+            <div class="nav-link connect-wallet-link custom-highlight" (click)="connectMetamask()">Connect Wallet</div>
         </div>
     </div>
 </nav>

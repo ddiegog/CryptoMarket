@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiResponse } from './models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,8 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  //TEST
-  getUser( wallet : string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/users/${wallet}`)
+  getUser( wallet : string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/users/${wallet}`)
   }
 
 }

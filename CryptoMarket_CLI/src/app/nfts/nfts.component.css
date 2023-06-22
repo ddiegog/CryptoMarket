@@ -1,0 +1,12 @@
+.custom-container {
+  background-color: #f4f6f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.content {
+  text-align: center;
+}
