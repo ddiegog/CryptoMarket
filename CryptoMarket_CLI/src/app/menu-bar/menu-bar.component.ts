@@ -11,14 +11,16 @@ import { CommonService } from '../services/common.service';
 export class MenuBarComponent {
   constructor(private data: DataService, private commonData: CommonService){}
 
+  walletLinked = CommonService.walletLinked;
+
   connectMetamask():void {
 
     this.commonData.connectMetamask()
-    .then((account:any) => {
+    .then((account:string) => {
       alert('Connected with account: '+ account);
     })
-    .catch((error:any) => {
-      alert('Failed to connect: '+ error);
+    .catch((error:string) => {
+      
     });
 
   }

@@ -1,38 +1,60 @@
-import { Injectable } from '@angular/core';
+import { Injectable  } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { OverlayContainer } from '@angular/cdk/overlay';
+
 
 declare global {
   interface Window { ethereum: any; }
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  
 })
 export class CommonService {
+
+  public static walletLinked: string = '';
 
   connectMetamask(): Promise<string> {
     return new Promise((resolve, reject) => {
         if (typeof window.ethereum !== 'undefined') {
-            //alert('MetaMask is installed!');
-
             window.ethereum.request({ method: 'eth_requestAccounts' })
-                .then((accounts:any) => resolve(accounts[0]))
+                .then((accounts:any) => 
+                {
+                  CommonService.walletLinked = accounts;
+                  resolve(accounts[0])
+                })
                 .catch((err:any) => {
                     if (err.code === 4001) {
-                        // El usuario rechazó la solicitud
-                        alert('Please connect to MetaMask.');
                         reject('Please connect to MetaMask.');
                     } else {
-                        console.error(err);
                         reject(err);
                     }
                 });
 
         } else {
-            alert('Install MetaMask!');
-            reject('Install MetaMask!');
+            reject('Metamask is not installed!');
+            this.openSnackBar('Metamask is not installed', 'error');
         }
     });
   }
 
-  constructor() { }
+  openSnackBar(message: string, type: string): void {
+    
+    this.snackBar.open(message, 'x', {
+      duration: 4000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: [`custom-snackbar-${type}`],
+      politeness: 'assertive',
+      data: { key: 'value' }
+    });
+
+    const container = this.overlayContainer.getContainerElement();
+    container.classList.add('custom-snackbar-error');
+    
+  }
+
+
+  constructor(private snackBar: MatSnackBar, private overlayContainer: OverlayContainer) { }
 }

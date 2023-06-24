@@ -9,6 +9,10 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { GameComponent } from './game/game.component';
 import { NftsComponent } from './nfts/nfts.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { NftsComponent } from './nfts/nfts.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

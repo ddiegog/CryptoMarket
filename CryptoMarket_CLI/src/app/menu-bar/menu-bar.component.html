@@ -23,7 +23,16 @@
                     <img src="/assets/img/balance-logo.png" width="20" height="20"> $
                 </a>
             </div>
-            <div class="nav-link connect-wallet-link custom-highlight" (click)="connectMetamask()">Connect Wallet</div>
+            <div class="nav-link connect-wallet-link custom-highlight" *ngIf="!walletLinked" (click)="connectMetamask()">Connect Wallet</div>
+            <div *ngIf="walletLinked">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  Menu
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+              </div>
         </div>
     </div>
 </nav>

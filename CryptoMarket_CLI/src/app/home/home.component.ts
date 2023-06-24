@@ -13,11 +13,12 @@ export class HomeComponent {
   connectMetamask():void {
 
     this.commonData.connectMetamask()
-    .then((account:any) => {
-      alert('Connected with account: '+ account);
+    .then((account:string) => {
+      console.log('Connected with account: '+ account);
+      CommonService.walletLinked = account;
     })
     .catch((error:any) => {
-      alert('Failed to connect: '+ error);
+      //alert('Failed to connect: '+ error);
     });
 
   }
