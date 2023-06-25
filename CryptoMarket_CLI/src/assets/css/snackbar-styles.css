@@ -1,14 +1,14 @@
-.custom-snackbar-alert {
+.mat-snack-bar-container .custom-snackbar-alert {
     background: #ff0000 !important; 
     color: #ffffff !important; 
 }
 
-.custom-snackbar-error {
+.mat-snack-bar-container .custom-snackbar-error {
     background: #ff0000 !important; 
     color: #ffffff !important; 
 }
 
-.custom-snackbar-success {
-    background: #ff0000 !important; 
+.mat-snack-bar-container .custom-snackbar-success {
+    background: #09f73c !important; 
     color: #ffffff !important; 
 }

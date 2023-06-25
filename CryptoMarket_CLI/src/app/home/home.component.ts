@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../services/common.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +9,33 @@ import { CommonService } from '../services/common.service';
 })
 export class HomeComponent {
 
-  constructor(private commonData: CommonService){}
+  private walletLinkedSubscription: Subscription = new Subscription();
+  walletLinked: string = '';
+
+  constructor(private commonService: CommonService){}
+
+  ngOnInit() {
+    this.walletLinkedSubscription = this.commonService.walletLinked$.subscribe(
+      walletLinked => {
+        this.walletLinked = walletLinked;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.walletLinkedSubscription.unsubscribe();
+  }
 
   connectMetamask():void {
 
-    this.commonData.connectMetamask()
+    this.commonService.connectMetamask()
     .then((account:string) => {
       console.log('Connected with account: '+ account);
-      CommonService.walletLinked = account;
+      this.walletLinked = account;
     })
     .catch((error:any) => {
       //alert('Failed to connect: '+ error);
-    });
+    })
 
   }
 

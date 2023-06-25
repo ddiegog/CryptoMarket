@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Profile</h2>
+            <form>
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label for="nick">Nick</label>
+                  <input type="text" id="nick" class="form-control" [(ngModel)]="user.nick" />
+                </div>
+                <div class="form-group col-6">
+                  <label for="nivel">Level</label>
+                  <input type="text" id="nivel" class="form-control" [value]="user.level" readonly/>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="imagen">Avatar</label>
+                    <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)" />
+                    <img *ngIf="user.image" [src]="user.image" class="img-thumbnail" alt="Avatar" />
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-info mt-2" (click)="saveChanges()">Save</button>
+            </form>
+          </div>
+          
+    </div>
+  </div>
+  

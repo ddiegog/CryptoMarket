@@ -11,6 +11,8 @@ import { GameComponent } from './game/game.component';
 import { NftsComponent } from './nfts/nfts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ProfileComponent } from './profile/profile.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -21,14 +23,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HomeComponent,
     FooterComponent,
     GameComponent,
-    NftsComponent
+    NftsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

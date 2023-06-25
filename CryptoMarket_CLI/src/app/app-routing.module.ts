@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { NftsComponent } from './nfts/nfts.component';
 import { GameComponent } from './game/game.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileGuard } from './guards/profile.guard';
 
 const routes: Routes = [
   {
@@ -22,6 +24,11 @@ const routes: Routes = [
   {
     path: 'game',
     component: GameComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [ProfileGuard]
   },
   { path: '**', 
     redirectTo: 'home'

@@ -1,6 +1,8 @@
 import { Injectable  } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { BehaviorSubject } from 'rxjs';
+import { last, map } from 'rxjs';
 
 
 declare global {
@@ -13,7 +15,26 @@ declare global {
 })
 export class CommonService {
 
-  public static walletLinked: string = '';
+  private walletLinkedSource = new BehaviorSubject<string>('');
+  walletLinked$ = this.walletLinkedSource.asObservable();
+
+
+  changeWalletLinkedState(newState: string) {
+    this.walletLinkedSource.next(newState);
+    localStorage.setItem('wallet', newState);
+  }
+
+  validateWalletInit(): void {
+    let wallet = localStorage.getItem('wallet');
+    if(wallet){
+      this.walletLinkedSource.next(wallet);
+    }
+  }
+
+  getWalletLinked(): string {
+    return this.walletLinkedSource.getValue();
+  }
+
 
   connectMetamask(): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -21,7 +42,8 @@ export class CommonService {
             window.ethereum.request({ method: 'eth_requestAccounts' })
                 .then((accounts:any) => 
                 {
-                  CommonService.walletLinked = accounts;
+                  this.changeWalletLinkedState(accounts[0]);
+                  this.openSnackBar('Connected with Metamask!', 'success');
                   resolve(accounts[0])
                 })
                 .catch((err:any) => {
@@ -39,6 +61,10 @@ export class CommonService {
     });
   }
 
+  private logInRegister(wallet: string) {
+
+  }
+
   openSnackBar(message: string, type: string): void {
     
     this.snackBar.open(message, 'x', {
@@ -53,6 +79,11 @@ export class CommonService {
     const container = this.overlayContainer.getContainerElement();
     container.classList.add('custom-snackbar-error');
     
+  }
+
+  logOut(): void {
+    this.changeWalletLinkedState('');
+    this.openSnackBar('Logged Out', 'success');
   }
 
 

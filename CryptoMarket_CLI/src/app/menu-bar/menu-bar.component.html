@@ -8,31 +8,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="javascript:;" routerLink="transfer" routerLinkActive="active">Transfer</a>
+                <a class="nav-link" routerLink="transfer" routerLinkActive="active">Transfer</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:;" routerLink="nfts" routerLinkActive="active">NFTs</a>
+                <a class="nav-link" routerLink="nfts" routerLinkActive="active">NFTs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:;" routerLink="game" routerLinkActive="active">Game</a>
+                <a class="nav-link" routerLink="game" routerLinkActive="active">Game</a>
             </li>
         </ul>
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
-                <a class="nav-link balance-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link balance-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/assets/img/balance-logo.png" width="20" height="20"> $
                 </a>
             </div>
             <div class="nav-link connect-wallet-link custom-highlight" *ngIf="!walletLinked" (click)="connectMetamask()">Connect Wallet</div>
-            <div *ngIf="walletLinked">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  Menu
+            <div *ngIf="walletLinked" class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Menu
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="#">Profile</a></li>
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" routerLink="profile">Profile</a></li>
+                    <li><a class="dropdown-item" routerLink="home" (click)="logOut()" >Logout</a></li>
                 </ul>
-              </div>
+            </div>
         </div>
     </div>
 </nav>

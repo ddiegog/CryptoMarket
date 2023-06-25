@@ -1,0 +1,13 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  h2 {
+    margin-bottom: 30px;
+  }
+  
+  .img-thumbnail {
+    max-width: 200px;
+    margin-top: 10px;
+  }
+  

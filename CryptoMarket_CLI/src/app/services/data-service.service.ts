@@ -16,4 +16,8 @@ export class DataService {
     return this.http.get<ApiResponse>(`${this.baseUrl}/users/${wallet}`)
   }
 
+  logInRegister(wallet : string): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.baseUrl}/users`, `{ "Wallet" : ${wallet} }`);
+  }
+
 }
