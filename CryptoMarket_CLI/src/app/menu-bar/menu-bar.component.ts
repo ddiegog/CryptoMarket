@@ -14,6 +14,8 @@ export class MenuBarComponent {
   private walletLinkedSubscription: Subscription = new Subscription();
   walletLinked: string = '';
 
+  isLoading = false;
+
   constructor(private data: DataService, private commonService: CommonService){}
 
   ngOnInit() {
@@ -32,20 +34,28 @@ export class MenuBarComponent {
   }
 
   connectMetamask():void {
-
+    this.startLoading();
     this.commonService.connectMetamask()
     .then((account:string) => {
       
-      
+      this.stopLoading();
     })
     .catch((error:string) => {
-      
+      this.stopLoading();
     });
 
   }
 
   logOut(){
     this.commonService.logOut();
+  }
+
+  private startLoading() {
+    this.isLoading = true;
+  }
+
+  private stopLoading() {
+    this.isLoading = false;
   }
 
 }
