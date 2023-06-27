@@ -101,9 +101,11 @@ namespace Logic.Logics
 
 
             // validate login
+            var authService = new AuthenticationService();
+            string token = authService.GenerateToken(login.Wallet);
 
 
-            return new AuthLogin { Token = user.Wallet + " - test" };
+            return new AuthLogin { Token = token };
             
         }
     }

@@ -6,10 +6,12 @@ using Entities;
 using Entities.DTO;
 using Entities.Filters;
 using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoMarket_API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     [ServiceFilter(typeof(ApiResponseActionFilter))]
@@ -55,7 +57,8 @@ namespace CryptoMarket_API.Controllers
             return _logicFactory.GetUserLogic().DeleteUser(wallet);
         }
 
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("auth")]
         public AuthLogin LogInRegister([FromBody] Login login)
         {
             var auth = _logicFactory.GetUserLogic().LoginRegister(login);

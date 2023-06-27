@@ -3,6 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { BehaviorSubject } from 'rxjs';
 import { last, map } from 'rxjs';
+import { DataService } from './data-service.service';
+import { ApiResponse } from '../models/api-response.model';
 
 
 declare global {
@@ -15,14 +17,33 @@ declare global {
 })
 export class CommonService {
 
+  constructor(
+    private snackBar: MatSnackBar, 
+    private overlayContainer: OverlayContainer,
+    private dataService: DataService
+    ) { }
+
   private walletLinkedSource = new BehaviorSubject<string>('');
   walletLinked$ = this.walletLinkedSource.asObservable();
 
 
-  changeWalletLinkedState(newState: string) {
-    this.walletLinkedSource.next(newState);
-    localStorage.setItem('wallet', newState);
+  private changeWalletLinkedState(newState: string) {
+    let wallet64 = btoa(newState);
+    this.walletLinkedSource.next(wallet64);
+
+    localStorage.setItem('wallet', wallet64);
   }
+
+  private unlinkAll(): void{
+    this.walletLinkedSource.next('');
+    localStorage.removeItem('token');
+    localStorage.removeItem('wallet');
+  }
+
+  hasJWT(): boolean{
+    return !!localStorage.getItem('token');
+  }
+
 
   validateWalletInit(): void {
     let wallet = localStorage.getItem('wallet');
@@ -32,7 +53,8 @@ export class CommonService {
   }
 
   getWalletLinked(): string {
-    return this.walletLinkedSource.getValue();
+    let wallet = atob(this.walletLinkedSource.getValue())
+    return wallet;
   }
 
 
@@ -42,9 +64,13 @@ export class CommonService {
             window.ethereum.request({ method: 'eth_requestAccounts' })
                 .then((accounts:any) => 
                 {
-                  this.changeWalletLinkedState(accounts[0]);
-                  this.openSnackBar('Connected with Metamask!', 'success');
-                  resolve(accounts[0])
+                  this.logInRegister(accounts[0]).then((r) => {
+                    resolve(accounts[0])
+                  }).catch((err) =>{
+
+                    reject(err);
+                  });
+
                 })
                 .catch((err:any) => {
                     if (err.code === 4001) {
@@ -61,8 +87,38 @@ export class CommonService {
     });
   }
 
-  private logInRegister(wallet: string) {
+  private logInRegister(wallet: string): Promise<string> {
 
+    return new Promise<string>((resolve, reject) => {
+      
+      this.dataService.logInRegister(wallet)
+        .subscribe((response:ApiResponse) => {
+
+          if(response.error){
+            this.openSnackBar(response.error, 'error');
+            reject(response.error);
+            return;
+          }
+
+          this.changeWalletLinkedState(wallet);
+          localStorage.setItem('token', response.data.token);
+
+          this.openSnackBar('Connected!', 'success');
+
+          resolve('');
+
+        }, error => {
+
+          let e = 'There was an error during the request: ' + error.message;
+          console.error(e);
+          this.openSnackBar(e, 'error');
+
+          reject(e);
+
+        });
+
+    });
+  
   }
 
   openSnackBar(message: string, type: string): void {
@@ -82,10 +138,9 @@ export class CommonService {
   }
 
   logOut(): void {
-    this.changeWalletLinkedState('');
+    this.unlinkAll();
     this.openSnackBar('Logged Out', 'success');
   }
 
 
-  constructor(private snackBar: MatSnackBar, private overlayContainer: OverlayContainer) { }
 }

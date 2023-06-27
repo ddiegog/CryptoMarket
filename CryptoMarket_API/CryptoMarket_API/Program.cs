@@ -1,8 +1,11 @@
 using CryptoMarket_API.ApiResponse;
 using DataAccess.DBEntities;
 using Logic;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,25 @@ builder.Services.AddDbContextFactory<DataAccess.DBEntities.CryptoMarketContext>(
 builder.Services.AddScoped<DataAccess.RepositoryFactory>();
 builder.Services.AddScoped<LogicFactory>();
 builder.Services.AddScoped<ApiResponseActionFilter>();
+
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+        .AddJwtBearer(x =>
+        {
+            x.RequireHttpsMetadata = false;
+            x.SaveToken = true;
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("649w7dod4jW7fASZ8mjrTaB")),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+            };
+        });
 
 builder.Services.AddCors(options =>
 {
@@ -49,6 +71,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("Policy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

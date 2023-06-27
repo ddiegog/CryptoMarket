@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "w3H/snQYK5n8Mc1xxwUPabK4No4N+M7AnnsZG0EKz0sZpXvKtx47xdK/Om5WoAQTDJn2WOXgK0T6xthKV3Y7eQ==",
+  "dgSpecHash": "nx6JizZkdGCiuNtnS4ef+zOTkxweOlwockdlpMWOibudI4hIjtXn5lz6fE7D712Tw4H9J0cv+CMOV2xmg5m3Pw==",
   "success": true,
   "projectFilePath": "D:\\Proyectos Visual Studio\\CryptoMarket\\CryptoMarket_API\\CryptoMarket_API\\CryptoMarket_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diego\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Diego\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.19\\microsoft.aspnetcore.authentication.jwtbearer.6.0.19.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",

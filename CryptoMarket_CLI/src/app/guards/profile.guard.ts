@@ -15,8 +15,9 @@ export class ProfileGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean | UrlTree {
       let wallet = this.commonService.getWalletLinked();
+      let hasJWT = this.commonService.hasJWT();
 
-      if(wallet)
+      if(wallet && hasJWT) 
         return true
       else 
         return this.router.parseUrl('/home');
