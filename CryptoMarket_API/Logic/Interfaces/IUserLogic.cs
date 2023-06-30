@@ -14,7 +14,7 @@ namespace Logic.Interfaces
         public UserDTO? GetUser(string wallet);
         public List<UserDTO> GetUsers(string nick, int level, int pageNumber, int pageSize);
         public AuthLogin LoginRegister(Login login);
-        public User UpdateUser();
+        public UserDTO UpdateUser(UserDTO userUpdate);
         public bool DeleteUser(string wallet);
 
     }

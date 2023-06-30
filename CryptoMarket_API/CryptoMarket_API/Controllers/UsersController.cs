@@ -35,10 +35,19 @@ namespace CryptoMarket_API.Controllers
             return user;
         }
 
+        [HttpPut("{wallet}")]
+        public UserDTO? Update(UserDTO userUpdate)
+        {
+            if (userUpdate == null || string.IsNullOrEmpty(userUpdate.Wallet)) return null;
+
+            var user = _logicFactory.GetUserLogic().UpdateUser(userUpdate);
+
+            return user;
+        }
+
         [HttpGet()]
         public List<UserDTO> GetUsers([FromQuery] UsersFilter filtros)
         {
-
             string nick = filtros.GetValue<string>("Nick", string.Empty);
             int level = filtros.GetValue<int>("Level", -1);
             int pageNumber = filtros.GetValue<int>("PageNumber", -1);

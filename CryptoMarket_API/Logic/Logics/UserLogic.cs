@@ -3,6 +3,7 @@ using DataAccess.DBEntities;
 using Entities;
 using Entities.DTO;
 using Logic.Interfaces;
+using Nethereum.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,14 +49,7 @@ namespace Logic.Logics
             UserDTO userDTO = null;
 
             if (user != null) {
-                userDTO = new UserDTO()
-                {
-                    Wallet = user.Wallet,
-                    Nick = user.Nick,
-                    Image = user.Img,
-                    LastLogin = user.LastLogin,
-                    Level = user.Level
-                };
+                userDTO = LogicUtils.UserToDto(user);
             }
             
             return userDTO;
@@ -67,20 +61,19 @@ namespace Logic.Logics
             var users = _repository.UserRepository().GetUsers(nick, level, pageNumber, pageSize);
 
             var usersDTO = new List<UserDTO>();
-            usersDTO = users.ConvertAll(x => new UserDTO() { 
-                Wallet = x.Wallet,
-                Nick = x.Nick,
-                Image = x.Img,
-                LastLogin = x.LastLogin,
-                Level = x.Level
-            });
+            usersDTO = users.ConvertAll(x => LogicUtils.UserToDto(x));
 
             return usersDTO;
         }
 
-        public User UpdateUser()
+        public UserDTO UpdateUser(UserDTO userUpdate)
         {
-            throw new NotImplementedException();
+            var user = LogicUtils.DtoToUser(userUpdate);
+
+            user = _repository.UserRepository().UpdateUser(user);
+
+            return LogicUtils.UserToDto(user);
+
         }
 
         public AuthLogin LoginRegister(Login login)
