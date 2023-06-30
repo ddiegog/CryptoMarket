@@ -121,7 +121,7 @@ export class CommonService {
   
   }
 
-  openSnackBar(message: string, type: string): void {
+  private openSnackBar(message: string, type: string): void {
     
     this.snackBar.open(message, 'x', {
       duration: 4000,

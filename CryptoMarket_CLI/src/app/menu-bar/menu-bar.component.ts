@@ -3,6 +3,7 @@ import { DataService } from '../services/data-service.service';
 import { RouterModule } from '@angular/router';
 import { CommonService } from '../services/common.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar',
@@ -16,7 +17,7 @@ export class MenuBarComponent {
 
   isLoading = false;
 
-  constructor(private data: DataService, private commonService: CommonService){}
+  constructor(private data: DataService, private commonService: CommonService, private router: Router){}
 
   ngOnInit() {
     this.walletLinkedSubscription = this.commonService.walletLinked$.subscribe(
@@ -56,6 +57,14 @@ export class MenuBarComponent {
 
   private stopLoading() {
     this.isLoading = false;
+  }
+
+  
+  navigateToProfile(){
+    let wallet = this.commonService.getWalletLinked();
+
+    this.router.navigate(['/profile'], { state: { parameter: wallet } });
+
   }
 
 }

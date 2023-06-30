@@ -29,7 +29,7 @@
                 Menu
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" routerLink="profile">Profile</a></li>
+                    <li><a class="dropdown-item" (click)="navigateToProfile()">Profile</a></li>
                     <li><a class="dropdown-item" routerLink="home" (click)="logOut()" >Logout</a></li>
                 </ul>
             </div>
