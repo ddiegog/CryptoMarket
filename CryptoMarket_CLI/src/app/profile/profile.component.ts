@@ -12,7 +12,8 @@ import { ApiResponse } from '../models/api-response.model';
 export class ProfileComponent implements OnInit {
   constructor(private dataService : DataService, private snackBar: MatSnackBar){}
 
-  user : User = new User('',0,'');
+  user : User = new User('','',0,'');
+  isLoading : boolean = false;
 
   //editMode = false;
 
@@ -22,13 +23,12 @@ export class ProfileComponent implements OnInit {
     
     this.dataService.getUser(wallet)
       .subscribe( (response:ApiResponse) => {
-        debugger
         if(response.error){
           this.snackBar.open(response.error, 'error');
           return;
         }
         
-        this.user = new User(response.data.nick, response.data.level, response.data.image);
+        this.user = new User(response.data.wallet ,response.data.nick, response.data.level, response.data.image);
 
       }, error => {
         let e = 'There was an error during the request: ' + error.message;
@@ -50,7 +50,23 @@ export class ProfileComponent implements OnInit {
 
   saveChanges() {
     //this.toggleEditMode();
-    
+    this.isLoading = true;
+
+    this.dataService.updateUser(this.user)
+      .subscribe( (response:ApiResponse) => {
+        if(response.error){
+          this.snackBar.open(response.error, 'error');
+          return;
+        }
+
+        this.isLoading = false;
+        this.snackBar.open('User updated successfully', 'success');
+
+      }, error => {
+        let e = 'There was an error during the request: ' + error.message;
+        console.error(e);
+        this.snackBar.open(e, 'error');
+      });
 
   }
 
