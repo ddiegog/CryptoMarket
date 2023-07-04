@@ -19,8 +19,9 @@
         </ul>
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
-                <a class="nav-link balance-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="/assets/img/balance-logo.png" width="20" height="20"> $
+                <a *ngIf="walletLinked" class="nav-link balance-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    11 Otts
+                    <img src="/assets/img/balance-logo.png" width="20" height="20">
                 </a>
             </div>
             <div class="nav-link connect-wallet-link custom-highlight" *ngIf="!walletLinked" (click)="connectMetamask()">Connect Wallet</div>

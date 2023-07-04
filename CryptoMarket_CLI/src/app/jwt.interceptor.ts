@@ -14,7 +14,7 @@ export class JwtInterceptor implements HttpInterceptor {
       });
     }
 
-    if(request.method !== 'GET'){
+    if(!['GET', 'DELETE'].includes(request.method)){
         request = request.clone({
             setHeaders: {
                 'Content-Type': 'application/json'

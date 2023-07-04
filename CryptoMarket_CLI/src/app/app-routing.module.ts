@@ -15,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'transfer',
-    component: TransferComponent
+    component: TransferComponent,
+    canActivate: [ProfileGuard]
   },
   {
     path: 'nfts',

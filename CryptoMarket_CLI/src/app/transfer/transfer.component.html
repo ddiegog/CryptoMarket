@@ -1,6 +1,28 @@
-<div class="custom-container">
-  <div class="content">
-    <h1>Coming Soon</h1>
-    <p>Exciting things are coming soon! Stay tuned and don't miss out on our big launch.</p>
+<div class="transfer-container" style="margin-top: 70px;">
+  <h2>Transfer</h2>
+
+  <div class="balance-info">
+      <p>Current balance: <span>{{balance}} Otts</span></p>
   </div>
+
+  <div class="transfer-form">
+
+      <label for="address">To:</label>
+      <input type="text" id="address" [(ngModel)]="to" placeholder="Enter the address..." required>
+
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" [value]="amount" (change)="checkAmount($event)" required>
+
+      <label for="message">Message:</label>
+      <textarea placeholder="Include a message..." type="text" id="amount" rows="3" (input)="updateMessage($event)" maxlength="100"></textarea>
+      <div class="character-count">{{ message.length || 0 }}/100</div>
+
+  </div>
+
+  <div class="gif-container">
+      <img src="assets/img/transfer.gif" alt="Otter transfer" style="width: 200px;">
+  </div>
+
+  <button (click)="transfer()" class="transfer-button">Transfer</button>
 </div>
+<app-loader [loading]="isLoading"></app-loader>
