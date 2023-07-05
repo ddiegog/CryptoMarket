@@ -18,7 +18,7 @@ namespace CryptoMarket_API.ApiResponse
                 // Manejar la excepción y reemplazar el resultado con uno nuevo
                 var apiResponse = new ApiResponse<object>
                 {
-                    Error = "Sorry! An error has ocurred: " + context.Exception.Message
+                    Error = context.Exception.Message
                 };
 
                 context.Result = new ObjectResult(apiResponse) { StatusCode = 200 };

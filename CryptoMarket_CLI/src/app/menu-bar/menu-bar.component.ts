@@ -16,6 +16,8 @@ export class MenuBarComponent {
   walletLinked: string = '';
 
   isLoading = false;
+  balance: number = 0;
+
 
   constructor(private data: DataService, private commonService: CommonService, private router: Router){}
 
@@ -38,7 +40,6 @@ export class MenuBarComponent {
     this.startLoading();
     this.commonService.connectMetamask()
     .then((account:string) => {
-      
       this.stopLoading();
     })
     .catch((error:string) => {
@@ -64,7 +65,6 @@ export class MenuBarComponent {
     let wallet = this.commonService.getWalletLinked();
 
     this.router.navigate(['/profile'], { state: { parameter: wallet } });
-
   }
 
 }

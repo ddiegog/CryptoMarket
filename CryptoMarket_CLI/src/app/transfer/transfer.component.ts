@@ -57,12 +57,11 @@ export class TransferComponent implements OnInit {
       return;
     }
 
-
   }
 
   transfer(): void {
     this.validateTransfer();
-
+    
   }
 
 }

@@ -6,18 +6,18 @@
               <div class="form-row">
                 <div class="form-group col-6">
                   <label for="nick">Nick</label>
-                  <input type="text" id="nick" name="nick" class="form-control" [(ngModel)]="user.nick" />
+                  <input type="text" id="nick" name="nick" class="form-control" [(ngModel)]="user!.nick" />
                 </div>
                 <div class="form-group col-6">
                   <label for="nivel">Level</label>
-                  <input type="number" id="nivel" name="level" class="form-control" [value]="user.level" readonly/>
+                  <input type="number" id="nivel" name="level" class="form-control" [value]="user!.level" readonly/>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-6">
                     <label for="imagen">Avatar</label>
                     <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)" />
-                    <img *ngIf="user.image" [src]="user.image" class="img-thumbnail" alt="Avatar" />
+                    <img *ngIf="user!.image" [src]="user!.image" class="img-thumbnail" alt="Avatar" />
                   </div>
               </div>
               <button type="submit" class="btn btn-info mt-2" (click)="saveChanges()">Save</button>

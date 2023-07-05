@@ -16,7 +16,8 @@ namespace Logic
                 Nick = user.Nick,
                 LastLogin = user.LastLogin,
                 Img = user.Image,
-                Active = true
+                Active = true,
+                Level = user.Level
             };
         }
         public static UserDTO UserToDto(User user)

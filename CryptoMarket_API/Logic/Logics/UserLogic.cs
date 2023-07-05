@@ -92,13 +92,14 @@ namespace Logic.Logics
             user.LastLogin = DateTime.Now;
             user = _repository.UserRepository().UpdateUser(user);
 
+            var userDTO = Logic.LogicUtils.UserToDto(user);
 
             // validate login
             var authService = new AuthenticationService();
             string token = authService.GenerateToken(login.Wallet);
 
 
-            return new AuthLogin { Token = token };
+            return new AuthLogin { Token = token, User = userDTO };
             
         }
     }

@@ -17,8 +17,8 @@ export class DataService {
     return this.http.get<ApiResponse>(`${this.baseUrl}/users/${wallet}`)
   }
 
-  updateUser( user : User): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${this.baseUrl}/users/${user.wallet}`, JSON.stringify(user))
+  updateUser( user : User | null): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${this.baseUrl}/users/${user!.wallet}`, JSON.stringify(user))
   }
 
   logInRegister(Wallet : string): Observable<ApiResponse> {
@@ -26,6 +26,8 @@ export class DataService {
     return this.http.post<ApiResponse>(`${this.baseUrl}/users/auth`, JSON.stringify(body));
   }
 
-
+  checkTokenValidity(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/auth/verify`);
+  }
 
 }

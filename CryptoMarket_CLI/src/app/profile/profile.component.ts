@@ -3,6 +3,7 @@ import { User } from '../models/user.model';
 import { DataService } from '../services/data-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiResponse } from '../models/api-response.model';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +11,9 @@ import { ApiResponse } from '../models/api-response.model';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  constructor(private dataService : DataService, private snackBar: MatSnackBar){}
+  constructor(private dataService : DataService, private commonService: CommonService){}
 
-  user : User = new User('','',0,'');
+  user : User | null = null;
   isLoading : boolean = false;
 
   //editMode = false;
@@ -21,20 +22,21 @@ export class ProfileComponent implements OnInit {
     let wallet = history.state.parameter;
     console.log('Account: ' + wallet);
     
-    this.dataService.getUser(wallet)
-      .subscribe( (response:ApiResponse) => {
-        if(response.error){
-          this.snackBar.open(response.error, 'error');
-          return;
-        }
+    // this.dataService.getUser(wallet)
+    //   .subscribe( (response:ApiResponse) => {
+    //     if(response.error){
+    //       this.commonService.openSnackBar(response.error, 'error');
+    //       return;
+    //     }
         
-        this.user = new User(response.data.wallet ,response.data.nick, response.data.level, response.data.image);
+    //     this.user = new User(response.data.wallet ,response.data.nick, response.data.level, response.data.image, '');
 
-      }, error => {
-        let e = 'There was an error during the request: ' + error.message;
-        console.error(e);
-        this.snackBar.open(e, 'error');
-      });
+    //   }, error => {
+    //     let e = 'There was an error during the request: ' + error.message;
+    //     console.error(e);
+    //     this.commonService.openSnackBar(e, 'error');
+    //   });
+    this.user = this.commonService.getCurrentUser();
   }
 
   // toggleEditMode() {
@@ -51,21 +53,22 @@ export class ProfileComponent implements OnInit {
   saveChanges() {
     //this.toggleEditMode();
     this.isLoading = true;
-
     this.dataService.updateUser(this.user)
       .subscribe( (response:ApiResponse) => {
         if(response.error){
-          this.snackBar.open(response.error, 'error');
+          this.commonService.openSnackBar(response.error, 'error');
           return;
         }
 
         this.isLoading = false;
-        this.snackBar.open('User updated successfully', 'success');
+        this.commonService.openSnackBar('User updated successfully', 'success');
+        this.commonService.setCurrentUser(response.data);
 
       }, error => {
+        this.isLoading = false;
         let e = 'There was an error during the request: ' + error.message;
         console.error(e);
-        this.snackBar.open(e, 'error');
+        this.commonService.openSnackBar(e, 'error');
       });
 
   }

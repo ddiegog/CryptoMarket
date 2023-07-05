@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { last, map } from 'rxjs';
 import { DataService } from './data-service.service';
 import { ApiResponse } from '../models/api-response.model';
+import { User } from '../models/user.model';
 
 
 declare global {
@@ -25,7 +26,15 @@ export class CommonService {
 
   private walletLinkedSource = new BehaviorSubject<string>('');
   walletLinked$ = this.walletLinkedSource.asObservable();
+  user : User | null = null;
 
+  getCurrentUser() : User | null {
+    return this.user;
+  }
+
+  setCurrentUser(user : User | null){
+    this.user = user;
+  }
 
   private changeWalletLinkedState(newState: string) {
     let wallet64 = btoa(newState);
@@ -44,19 +53,28 @@ export class CommonService {
     return !!localStorage.getItem('token');
   }
 
-
   validateWalletInit(): void {
-    let wallet = localStorage.getItem('wallet');
-    if(wallet){
-      this.walletLinkedSource.next(wallet);
+    let wallet64 = localStorage.getItem('wallet');
+    if(wallet64){
+      this.walletLinkedSource.next(wallet64);
+
+      if(!this.user){
+        this.dataService.getUser(atob(wallet64)!).subscribe(r =>{
+          debugger;
+          this.user = r.data;
+        }, 
+        error => {
+          this.openSnackBar(error.message, 'error');
+        })
+      }
     }
+
   }
 
   getWalletLinked(): string {
     let wallet = atob(this.walletLinkedSource.getValue())
     return wallet;
   }
-
 
   connectMetamask(): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -65,12 +83,11 @@ export class CommonService {
                 .then((accounts:any) => 
                 {
                   this.logInRegister(accounts[0]).then((r) => {
+                    this.user = r;
                     resolve(accounts[0])
                   }).catch((err) =>{
-
                     reject(err);
                   });
-
                 })
                 .catch((err:any) => {
                     if (err.code === 4001) {
@@ -87,9 +104,9 @@ export class CommonService {
     });
   }
 
-  private logInRegister(wallet: string): Promise<string> {
+  private logInRegister(wallet: string): Promise<User> {
 
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<User>((resolve, reject) => {
       
       this.dataService.logInRegister(wallet)
         .subscribe((response:ApiResponse) => {
@@ -105,7 +122,7 @@ export class CommonService {
 
           this.openSnackBar('Connected!', 'success');
 
-          resolve('');
+          resolve(response.data.user);
 
         }, error => {
 
@@ -121,7 +138,7 @@ export class CommonService {
   
   }
 
-  private openSnackBar(message: string, type: string): void {
+  openSnackBar(message: string, type: string): void {
     
     this.snackBar.open(message, 'x', {
       duration: 4000,
@@ -137,10 +154,18 @@ export class CommonService {
     
   }
 
-  logOut(): void {
+  logOut(alert: boolean = false): void {
     this.unlinkAll();
-    this.openSnackBar('Logged Out', 'success');
+    if(alert) this.openSnackBar('Logged Out', 'success');
   }
 
-
+  verifyToken(cb: () => void): void {
+    this.dataService.checkTokenValidity().subscribe(
+      ()=>{}, 
+      (error)=>{
+        console.error(error.message);
+        cb();
+        this.openSnackBar('Your session has expired. Please log in again.', 'alert');
+      })
+  }
 }

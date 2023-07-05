@@ -84,8 +84,15 @@ namespace DataAccess.Clases
         {
             using (var context = _context.CreateDbContext())
             {
-                context.Users.Update(user);
-                context.SaveChanges();
+                var existingUser = context.Users.Find(user.Wallet);
+
+                if (existingUser != null)
+                {
+                    context.Entry(existingUser).CurrentValues.SetValues(user);
+                    context.SaveChanges();
+                }
+                else
+                    throw new Exception("User doesn't exist");
 
                 return user;
             }
