@@ -22,21 +22,20 @@ export class ProfileComponent implements OnInit {
     let wallet = history.state.parameter;
     console.log('Account: ' + wallet);
     
-    // this.dataService.getUser(wallet)
-    //   .subscribe( (response:ApiResponse) => {
-    //     if(response.error){
-    //       this.commonService.openSnackBar(response.error, 'error');
-    //       return;
-    //     }
+    this.dataService.getUser(wallet)
+      .subscribe( (response:ApiResponse) => {
+        if(response.error){
+          this.commonService.openSnackBar(response.error, 'error');
+          return;
+        }
         
-    //     this.user = new User(response.data.wallet ,response.data.nick, response.data.level, response.data.image, '');
+        this.user = response.data;
 
-    //   }, error => {
-    //     let e = 'There was an error during the request: ' + error.message;
-    //     console.error(e);
-    //     this.commonService.openSnackBar(e, 'error');
-    //   });
-    this.user = this.commonService.getCurrentUser();
+      }, error => {
+        let e = 'There was an error during the request: ' + error.message;
+        console.error(e);
+        this.commonService.openSnackBar(e, 'error');
+      });
   }
 
   // toggleEditMode() {

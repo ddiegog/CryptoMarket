@@ -60,11 +60,10 @@ export class CommonService {
 
       if(!this.user){
         this.dataService.getUser(atob(wallet64)!).subscribe(r =>{
-          debugger;
           this.user = r.data;
         }, 
         error => {
-          this.openSnackBar(error.message, 'error');
+          console.log(error.message);
         })
       }
     }
