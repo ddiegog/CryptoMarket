@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-transfer',
@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class TransferComponent implements OnInit {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private commonService: CommonService) { }
 
   to : string = '';
   message: string = '';
@@ -19,7 +19,7 @@ export class TransferComponent implements OnInit {
   balance: number = 0;
 
   ngOnInit(): void {
-    
+
   }
 
   updateMessage(event: Event): void {
@@ -43,17 +43,22 @@ export class TransferComponent implements OnInit {
   validateTransfer(): void{
 
     if(!this.to){
-      this.snackBar.open('You have to provide a wallet to transfer!', 'error');
+      this.commonService.openSnackBar('You have to provide an address to transfer!', 'error');
       return;
     }
 
-    if(this.amount < 0.01 || this.amount > 10000000){
-      this.snackBar.open('You can only transfer between 0.01 and 10000000 Otts', 'error');
+    if(!/^0x[a-fA-F0-9]{40}$/.test(this.to)){
+      this.commonService.openSnackBar('The address is invalid!', 'error');
+      return;
+    }
+
+    if(this.amount < 0.001 || this.amount > 10000000){
+      this.commonService.openSnackBar('You can only transfer between 0.001 and 10000000 Otts', 'error');
       return;
     }
 
     if(this.amount > this.balance){
-      this.snackBar.open('The amount to transfer must be equal or less than your balance!', 'error');
+      this.commonService.openSnackBar('The amount to transfer must be equal or less than your balance!', 'error');
       return;
     }
 
@@ -62,6 +67,8 @@ export class TransferComponent implements OnInit {
   transfer(): void {
     this.validateTransfer();
     
+    
+
   }
 
 }

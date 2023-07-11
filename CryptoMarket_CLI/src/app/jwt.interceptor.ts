@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse, HttpEvent } from '@angular/common/http';
-import { Observable, catchError, of, throwError } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { CommonService } from './services/common.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
