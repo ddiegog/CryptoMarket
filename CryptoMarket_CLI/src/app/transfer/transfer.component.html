@@ -14,8 +14,8 @@
       <input type="number" id="amount" [value]="amount" (change)="checkAmount($event)" required>
 
       <label for="message">Message:</label>
-      <textarea placeholder="Include a message..." type="text" id="amount" rows="3" (input)="updateMessage($event)" maxlength="100"></textarea>
-      <div class="character-count">{{ message.length || 0 }}/100</div>
+      <textarea placeholder="Include a message..." type="text" id="amount" rows="3" [(ngModel)]="message" (input)="updateMessage($event)" maxlength="250"></textarea>
+      <div class="character-count">{{ message.length || 0 }}/250</div>
 
   </div>
 

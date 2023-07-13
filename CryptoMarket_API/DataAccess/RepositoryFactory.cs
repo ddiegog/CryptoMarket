@@ -17,6 +17,7 @@ namespace DataAccess
             => _context = context;
 
         public UserRepository UserRepository() => new UserRepository(_context);
+        public TransactionRepository TransactionRepository() => new TransactionRepository(_context);
 
     }
 }

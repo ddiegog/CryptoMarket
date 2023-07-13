@@ -1,7 +1,4 @@
-﻿
-using Azure;
-using CryptoMarket_API.ApiResponse;
-using DataAccess.DBEntities;
+﻿using CryptoMarket_API.ApiResponse;
 using Entities;
 using Entities.DTO;
 using Entities.Filters;
@@ -66,6 +63,11 @@ namespace CryptoMarket_API.Controllers
             return _logicFactory.GetUserLogic().DeleteUser(wallet);
         }
 
+        [HttpGet("balance/{wallet}")]
+        public double GetBalance() {
+            return 99;
+        }
+
         [AllowAnonymous]
         [HttpPost("auth")]
         public AuthLogin LogInRegister([FromBody] Login login)
@@ -73,7 +75,6 @@ namespace CryptoMarket_API.Controllers
             var auth = _logicFactory.GetUserLogic().LoginRegister(login);
 
             return auth;
-
         }
 
     }

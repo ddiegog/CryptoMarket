@@ -3,7 +3,6 @@ using DataAccess.DBEntities;
 using Entities;
 using Entities.DTO;
 using Logic.Interfaces;
-using Nethereum.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,10 +45,11 @@ namespace Logic.Logics
         public UserDTO? GetUser(string wallet)
         {
             var user = _repository.UserRepository().GetUser(wallet);
-            UserDTO userDTO = null;
+            UserDTO userDTO = null!;
 
             if (user != null) {
                 userDTO = LogicUtils.UserToDto(user);
+                userDTO.Balance = 99; //TEST
             }
             
             return userDTO;
@@ -93,6 +93,7 @@ namespace Logic.Logics
             user = _repository.UserRepository().UpdateUser(user);
 
             var userDTO = Logic.LogicUtils.UserToDto(user);
+            userDTO.Balance = 99;
 
             // validate login
             var authService = new AuthenticationService();

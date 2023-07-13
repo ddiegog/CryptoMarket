@@ -26,14 +26,19 @@ export class CommonService {
 
   private walletLinkedSource = new BehaviorSubject<string>('');
   walletLinked$ = this.walletLinkedSource.asObservable();
-  user : User | null = null;
+  
+  user : User = this.defaultUser();
 
-  getCurrentUser() : User | null {
+  private userLinkedSource = new BehaviorSubject<User>(this.defaultUser());
+  userLinked$ = this.userLinkedSource.asObservable();
+
+  getCurrentUser() : User {
     return this.user;
   }
 
-  setCurrentUser(user : User | null){
-    this.user = user;
+  setCurrentUser(user : User){
+    //this.user = this.defaultUser();
+    this.userLinkedSource.next(user);
   }
 
   private changeWalletLinkedState(newState: string) {
@@ -82,10 +87,14 @@ export class CommonService {
                 .then((accounts:any) => 
                 {
                   this.logInRegister(accounts[0]).then((r) => {
+
                     this.user = r;
-                    resolve(accounts[0])
+                    resolve(accounts[0]);
+
                   }).catch((err) =>{
+
                     reject(err);
+
                   });
                 })
                 .catch((err:any) => {
@@ -117,6 +126,7 @@ export class CommonService {
           }
 
           this.changeWalletLinkedState(wallet);
+          this.setCurrentUser(response.data.user);
           localStorage.setItem('token', response.data.token);
 
           this.openSnackBar('Connected!', 'success');
@@ -166,5 +176,9 @@ export class CommonService {
         cb();
         this.openSnackBar('Your session has expired. Please log in again.', 'alert');
       })
+  }
+
+  private defaultUser() : User {
+    return new User('','',0,'','',0);
   }
 }

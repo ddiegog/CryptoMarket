@@ -20,5 +20,8 @@ namespace Logic
         }
 
         public IUserLogic GetUserLogic() => UserLogic.GetInstance(_repository);
+
+        public ITransactionLogic GetTransactionLogic() => TransactionLogic.GetInstance(_repository);
+
     }
 }

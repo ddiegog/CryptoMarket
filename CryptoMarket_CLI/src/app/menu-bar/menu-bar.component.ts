@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { CommonService } from '../services/common.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ApiResponse } from '../models/api-response.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-menu-bar',
@@ -13,27 +15,49 @@ import { Router } from '@angular/router';
 export class MenuBarComponent {
 
   private walletLinkedSubscription: Subscription = new Subscription();
+  private userLinkedSubscription: Subscription = new Subscription();
   walletLinked: string = '';
 
   isLoading = false;
   balance: number = 0;
 
-
-  constructor(private data: DataService, private commonService: CommonService, private router: Router){}
+  constructor(private dataService: DataService, private commonService: CommonService, private router: Router){}
 
   ngOnInit() {
+
     this.walletLinkedSubscription = this.commonService.walletLinked$.subscribe(
       walletLinked => {
         this.walletLinked = walletLinked;
-        // Aquí puedes hacer lo que quieras con el valor actualizado
       }
     );
     this.commonService.validateWalletInit()
+
+    this.userLinkedSubscription = this.commonService.userLinked$.subscribe(
+      userLinked => {
+        this.balance = userLinked.balance;
+    });
+    
+    // get balance
+    this.dataService.getBalance(this.walletLinked)
+      .subscribe( (response: ApiResponse) =>{
+
+        if(response.error){
+          this.commonService.openSnackBar('Error getting the balance: ' + response.error, 'error');
+          return;
+        }
+
+        this.balance = response.data;
+
+        const auxUser = this.commonService.getCurrentUser();
+        auxUser.balance = this.balance;
+        this.commonService.setCurrentUser(auxUser);
+        
+      } );
   }
 
   ngOnDestroy() {
-    // No olvides cancelar la suscripción cuando el componente se destruya
     this.walletLinkedSubscription.unsubscribe();
+    this.userLinkedSubscription.unsubscribe();
   }
 
   connectMetamask():void {

@@ -32,5 +32,33 @@ namespace Logic
             };
         }
 
+        public static Transaction DtoToTransaction(TransactionDTO transactionDTO) {
+            return new Transaction
+            {
+                Id = transactionDTO.Id,
+                Amount = transactionDTO.Amount,
+                Date = transactionDTO.Date,
+                FromWallet = transactionDTO.FromWallet,
+                ToWallet = transactionDTO.ToWallet,
+                Type = transactionDTO.Type,
+                Message = transactionDTO.Message
+            };
+        }
+
+        public static TransactionDTO TransactionToDto(Transaction transaction)
+        {
+            return new TransactionDTO
+            {
+                Id = transaction.Id,
+                Amount = transaction.Amount,
+                Date = transaction.Date,
+                FromWallet = transaction.FromWallet,
+                ToWallet = transaction.ToWallet,
+                Type = transaction.Type,
+                Message = transaction.Message
+            };
+        }
+
+
     }
 }

@@ -13,5 +13,7 @@ namespace Entities.DTO
         public string? Image { get; set; }
         public DateTime? LastLogin { get; set; }
         public int? Level { get; set; }
+
+        public double Balance { get; set; }
     }
 }

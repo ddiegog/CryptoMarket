@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
 import { User } from '../models/user.model';
+import { Transaction } from '../models/transaction.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,14 @@ export class DataService {
 
   checkTokenValidity(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.baseUrl}/auth/verify`);
+  }
+
+  addTransaction(transaction: Transaction): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.baseUrl}/Transactions`, JSON.stringify(transaction));
+  }
+
+  getBalance(wallet: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/Users/balance/${wallet}`);
   }
 
 }

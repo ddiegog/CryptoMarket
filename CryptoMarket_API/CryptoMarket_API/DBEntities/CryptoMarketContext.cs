@@ -23,7 +23,6 @@ public partial class CryptoMarketContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<GenericType>(entity =>
@@ -45,33 +44,36 @@ public partial class CryptoMarketContext : DbContext
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Transact__3214EC0784C6166A");
+            entity.HasKey(e => e.Id).HasName("PK__Transact__3214EC07B9E6CAC7");
 
             entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.FromWallet)
-                .HasMaxLength(40)
+                .HasMaxLength(42)
+                .IsUnicode(false);
+            entity.Property(e => e.Message)
+                .HasMaxLength(250)
                 .IsUnicode(false);
             entity.Property(e => e.ToWallet)
-                .HasMaxLength(40)
+                .HasMaxLength(42)
                 .IsUnicode(false);
 
             entity.HasOne(d => d.FromWalletNavigation).WithMany(p => p.TransactionFromWalletNavigations)
                 .HasForeignKey(d => d.FromWallet)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Transacti__FromW__5812160E");
+                .HasConstraintName("FK__Transacti__FromW__6C190EBB");
 
             entity.HasOne(d => d.ToWalletNavigation).WithMany(p => p.TransactionToWalletNavigations)
                 .HasForeignKey(d => d.ToWallet)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Transacti__ToWal__59063A47");
+                .HasConstraintName("FK__Transacti__ToWal__6D0D32F4");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Wallet).HasName("PK__Users__BE6DEB893E03C904");
+            entity.HasKey(e => e.Wallet).HasName("PK__Users__BE6DEB8982D56053");
 
             entity.Property(e => e.Wallet)
-                .HasMaxLength(40)
+                .HasMaxLength(42)
                 .IsUnicode(false);
             entity.Property(e => e.Active)
                 .IsRequired()
@@ -79,9 +81,9 @@ public partial class CryptoMarketContext : DbContext
             entity.Property(e => e.Img)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.LastLogin).HasColumnType("datetime");
+            entity.Property(e => e.LastLogin).HasColumnType("datetime2");
             entity.Property(e => e.Level).HasDefaultValueSql("((0))");
-            entity.Property(e => e.Nick).HasMaxLength(20);
+            entity.Property(e => e.Nick).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);
