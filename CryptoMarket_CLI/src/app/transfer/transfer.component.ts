@@ -80,12 +80,15 @@ export class TransferComponent implements OnInit {
   }
 
   transfer(): void {
-debugger
     if(!this.validateTransfer()) return;
 
     let transaction = new Transaction(0, 1, this.amount, undefined, this.commonService.getWalletLinked(), this.to);
 
     this.isLoading = true;
+
+    //firmar
+    this.commonService.signMessage("I confirm my approval to transfer "+ this.amount +" ether to the account " + this.commonService.getCurrentUser().wallet + " using MetaMask.");
+
     this.dataService.addTransaction(transaction)
     .subscribe((response: ApiResponse) => {
       this.isLoading = false;

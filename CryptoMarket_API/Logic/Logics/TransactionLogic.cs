@@ -54,19 +54,16 @@ namespace Logic.Logics
 
             if (transactionDTO.Id < 0)
                 throw new ArgumentException("You have to provide an address to transfer!");
-
-
             // validate here that both wallets exists in database
             // from
-            User? user = null;
-            user = _repository.UserRepository().GetUser(transactionDTO.FromWallet);
+            User? user = _repository.UserRepository().GetUser(transactionDTO.FromWallet);
             if (user == null)
-                throw new ArgumentException("Sender doesnt exist");
+                throw new ArgumentException("Sender doesnt exist in OtterMints");
 
             //to
             user = _repository.UserRepository().GetUser(transactionDTO.ToWallet);
             if (user == null)
-                throw new ArgumentException("Receiver doesnt exist");
+                throw new ArgumentException("Receiver doesnt exist in OtterMints");
 
             // ---------------------------------------------------------------------------
 
@@ -75,6 +72,8 @@ namespace Logic.Logics
 
             var transaction = LogicUtils.DtoToTransaction(transactionDTO);
 
+            // add to blockchain
+            // if added ok will add it to the db
             var trans = _repository.TransactionRepository().AddTransaction(transaction);
 
             transactionDTO = LogicUtils.TransactionToDto(trans);

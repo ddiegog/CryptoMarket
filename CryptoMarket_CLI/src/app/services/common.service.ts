@@ -6,10 +6,11 @@ import { last, map } from 'rxjs';
 import { DataService } from './data-service.service';
 import { ApiResponse } from '../models/api-response.model';
 import { User } from '../models/user.model';
+import { ethers } from 'ethers';
 
 
 declare global {
-  interface Window { ethereum: any; }
+  interface Window { ethereum: any; web3: any; }
 }
 
 @Injectable({
@@ -18,11 +19,14 @@ declare global {
 })
 export class CommonService {
 
+  provider = new ethers.BrowserProvider(window.ethereum);
+
   constructor(
     private snackBar: MatSnackBar, 
     private overlayContainer: OverlayContainer,
     private dataService: DataService
-    ) { }
+    ) {}
+    
 
   private walletLinkedSource = new BehaviorSubject<string>('');
   walletLinked$ = this.walletLinkedSource.asObservable();
@@ -176,6 +180,17 @@ export class CommonService {
         cb();
         this.openSnackBar('Your session has expired. Please log in again.', 'alert');
       })
+  }
+
+  async signMessage(message: string): Promise<boolean> {
+    const from = this.getCurrentUser().wallet;
+
+    const signer = await this.provider.getSigner();
+    signer.signMessage(message).then((s)=>{
+      console.log(s);
+    });
+    
+    return true;
   }
 
   private defaultUser() : User {

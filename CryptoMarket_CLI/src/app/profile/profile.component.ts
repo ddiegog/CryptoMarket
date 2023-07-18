@@ -13,7 +13,7 @@ import { CommonService } from '../services/common.service';
 export class ProfileComponent implements OnInit {
   constructor(private dataService : DataService, private commonService: CommonService){}
 
-  user : User | null = null;
+  user : User = new User('', '', 0, '', '', 0,);
   isLoading : boolean = false;
 
   //editMode = false;
