@@ -105,7 +105,6 @@ export class TransferComponent implements OnInit {
                 return;
               }
 
-              // get the balance
               this.cleanVariables();
               this.dataService.getBalance(this.commonService.getWalletLinked());
               this.commonService.openSnackBar('Transfer completed successfully!', 'success');

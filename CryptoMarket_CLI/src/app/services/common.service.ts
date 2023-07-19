@@ -184,9 +184,9 @@ export class CommonService {
 
   signMessage(message: string): Promise<string> {
 
-    return new Promise<string>(async (resolve, reject) => {
+    return new Promise<string>(async (resolve) => {
       
-      const from = this.getCurrentUser().wallet;
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
       const signer = await this.provider.getSigner();
       signer.signMessage(message).then((s)=>{
         resolve(s);
@@ -194,7 +194,6 @@ export class CommonService {
         console.log(x);
         resolve("");
       });
-
 
     });
    
