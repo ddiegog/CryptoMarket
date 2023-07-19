@@ -22,5 +22,10 @@ namespace Entities.DTO
 
         public DateTime Date { get; set; }
 
+        public string? Signature { get; set; }
+
+        public string? SignedPayload { get; set; }
+
+
     }
 }

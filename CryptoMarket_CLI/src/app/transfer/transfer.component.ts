@@ -82,34 +82,46 @@ export class TransferComponent implements OnInit {
   transfer(): void {
     if(!this.validateTransfer()) return;
 
-    let transaction = new Transaction(0, 1, this.amount, undefined, this.commonService.getWalletLinked(), this.to);
+    let transaction = new Transaction(0, 1, this.amount, undefined, this.commonService.getWalletLinked(), this.to, this.message);
 
     this.isLoading = true;
 
     //firmar
-    this.commonService.signMessage("I confirm my approval to transfer "+ this.amount +" ether to the account " + this.commonService.getCurrentUser().wallet + " using MetaMask.");
+    const payload = "I confirm my approval to transfer "+ this.amount +" Otts to the account " + this.to + " using MetaMask.";
+    this.commonService.signMessage(payload)
+      .then((signed => {
 
-    this.dataService.addTransaction(transaction)
-    .subscribe((response: ApiResponse) => {
-      this.isLoading = false;
+        if(signed){
 
-      if(response.error){
-        this.commonService.openSnackBar(response.error, 'error');
-        return;
-      }
+          transaction.signedPayload = payload;
+          transaction.signature = signed;
 
-      // get the balance
-      this.cleanVariables();
-      this.dataService.getBalance(this.commonService.getWalletLinked());
-      this.commonService.openSnackBar('Transfer completed successfully!', 'success');
+          this.dataService.addTransaction(transaction)
+            .subscribe((response: ApiResponse) => {
+              this.isLoading = false;
 
-    }, 
-    (err:any)=>{
-      this.isLoading = false;
-      console.error(err);
-      this.commonService.openSnackBar(err.message, 'error');
-    });
+              if(response.error){
+                this.commonService.openSnackBar(response.error, 'error');
+                return;
+              }
+
+              // get the balance
+              this.cleanVariables();
+              this.dataService.getBalance(this.commonService.getWalletLinked());
+              this.commonService.openSnackBar('Transfer completed successfully!', 'success');
+
+            }, 
+            (err:any)=>{
+              this.isLoading = false;
+              console.error(err);
+              this.commonService.openSnackBar(err.message, 'error');
+            });
+        }
+        else{
+          this.isLoading = false;
+          this.commonService.openSnackBar("Please, sign the transaction!", "error");
+          return;
+        }
+      }))
   }
-
-  
 }

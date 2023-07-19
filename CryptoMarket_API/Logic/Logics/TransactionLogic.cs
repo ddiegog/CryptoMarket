@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using Blockchain;
+using DataAccess;
 using DataAccess.DBEntities;
 using Entities.DTO;
 using Logic.Interfaces;
@@ -70,13 +71,20 @@ namespace Logic.Logics
 
             transactionDTO.Date = DateTime.Now;
 
-            var transaction = LogicUtils.DtoToTransaction(transactionDTO);
-
             // add to blockchain
             // if added ok will add it to the db
-            var trans = _repository.TransactionRepository().AddTransaction(transaction);
+            bool isValidSignature = CryptoHandler.ValidateSignature(transactionDTO.FromWallet, transactionDTO.Signature!, transactionDTO.SignedPayload!);
 
-            transactionDTO = LogicUtils.TransactionToDto(trans);
+            if (isValidSignature)
+            {
+                var transaction = LogicUtils.DtoToTransaction(transactionDTO);
+
+                var trans = _repository.TransactionRepository().AddTransaction(transaction);
+
+                transactionDTO = LogicUtils.TransactionToDto(trans);
+            }
+            else
+                throw new ArgumentException("The signature is invalid"); 
 
             return transactionDTO;
         }

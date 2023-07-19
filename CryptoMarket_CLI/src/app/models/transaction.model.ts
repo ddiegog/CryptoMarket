@@ -6,6 +6,8 @@ export class Transaction {
     amount: number;
     date?: Date;
     message?: string;
+    signature?: string;
+    signedPayload?: string;
 
     constructor(
         id: number,

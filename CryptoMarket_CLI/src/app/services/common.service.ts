@@ -182,15 +182,22 @@ export class CommonService {
       })
   }
 
-  async signMessage(message: string): Promise<boolean> {
-    const from = this.getCurrentUser().wallet;
+  signMessage(message: string): Promise<string> {
 
-    const signer = await this.provider.getSigner();
-    signer.signMessage(message).then((s)=>{
-      console.log(s);
+    return new Promise<string>(async (resolve, reject) => {
+      
+      const from = this.getCurrentUser().wallet;
+      const signer = await this.provider.getSigner();
+      signer.signMessage(message).then((s)=>{
+        resolve(s);
+      }).catch(x => {
+        console.log(x);
+        resolve("");
+      });
+
+
     });
-    
-    return true;
+   
   }
 
   private defaultUser() : User {
