@@ -77,8 +77,11 @@ namespace Logic.Logics
 
             if (isValidSignature)
             {
-                var transaction = LogicUtils.DtoToTransaction(transactionDTO);
+                // add to the smart contract
+                CryptoHandler.Transfer(transactionDTO.FromWallet, transactionDTO.ToWallet, transactionDTO.Amount, transactionDTO.Message!);
 
+                // add to bd
+                var transaction = LogicUtils.DtoToTransaction(transactionDTO);
                 var trans = _repository.TransactionRepository().AddTransaction(transaction);
 
                 transactionDTO = LogicUtils.TransactionToDto(trans);
