@@ -21,6 +21,29 @@ export class TransferComponent implements OnInit {
   message: string = '';
   amount: number = 0;
   isLoading: boolean = false;
+  transactions: Transaction[] = [
+    { amount: 12.5, message: 'Payment', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now())},
+    { amount: 1, message: 'Buy', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 10000)},
+    { amount: 3, message: '4571562356', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 15000)},
+    { amount: 44, message: 'fsadf', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now() - 200000)},
+    { amount: 52, message: 'thanks', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 250000)},
+    { amount: 55, message: 'crypto', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now() - 270000)},
+    { amount: 43.5, message: 'payment', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now() - 290000)},
+    { amount: 15.5, message: 'crypto', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now() - 340000)},
+    { amount: 35.5, message: 'thanks', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 450000)},
+    { amount: 14.4, message: 'thanks', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 500000)},
+    { amount: 15.54, message: 'crypto', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now() - 600000)},
+    { amount: 15.54, message: 'thanks', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 650000)},
+    { amount: 15.555, message: 'crypto', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 700000)},
+    { amount: 65.7, message: 'crypto thanks', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 800000)},
+    { amount: 14.5, message: 'crypto', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now() - 820000)},
+    { amount: 14.5, message: 'crypto thanks', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 860000)},
+    { amount: 45.2, message: 'payment thanks', toWallet: "0xf89341959ce874ba581dccf5001747d46fac2b20", date: new Date(Date.now() - 870000)},
+    { amount: 16.46, message: 'sadf', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 900000)},
+    { amount: 57.5, message: '23f', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 950000)},
+    { amount: 99, message: 'asdf', toWallet: "0x72cbcae7352545996bfa53ac6a1c07cb1b18f82d", date: new Date(Date.now() - 990000)},
+  ];
+  showCount: number = 10;
 
   balance: number = 0;
 
@@ -30,6 +53,12 @@ export class TransferComponent implements OnInit {
       userLinked => {
         this.balance = userLinked.balance;
     });
+    
+
+  }
+
+  changeShow(): void {
+    this.showCount = (this.showCount == 10 ? 20 : 10);
   }
 
   ngOnDestroy(): void { 

@@ -17,8 +17,8 @@ namespace Blockchain
             return signerAddressRecovered.ToLower() == address.ToLower();
         }
 
-        public static bool Transfer(string from, string to, double amount, string message) {
-            return true;
+        public static void Transfer(string from, string to, double amount, string message) {
+
         }
     }
 }

@@ -1,6 +1,6 @@
 export class Transaction {
-    id: number;
-    type: number;
+    id?: number;
+    type?: number;
     fromWallet?: string;
     toWallet?: string;
     amount: number;
