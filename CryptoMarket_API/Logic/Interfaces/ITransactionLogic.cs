@@ -11,7 +11,7 @@ namespace Logic.Interfaces
     {
         TransactionDTO GetTransaction(Int64 id);
         TransactionDTO AddTransaction(TransactionDTO transactionDTO);
-        List<TransactionDTO> GetTransactions();
+        List<TransactionDTO> GetTransactions(int q);
 
     }
 }

@@ -11,6 +11,6 @@ namespace DataAccess.Interfaces
     {
         Transaction GetTransaction(Int64 id);
         Transaction AddTransaction(Transaction transactionDTO);
-        List<Transaction> GetTransactions();
+        List<Transaction> GetTransactions(string wallet, int q);
     }
 }

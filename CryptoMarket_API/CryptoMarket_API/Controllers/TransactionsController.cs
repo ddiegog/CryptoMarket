@@ -10,7 +10,7 @@ namespace CryptoMarket_API.Controllers
     [ApiController]
     [Route("[controller]")]
     [ServiceFilter(typeof(ApiResponseActionFilter))]
-    public class TransactionsController
+    public class TransactionsController : Controller
     {
         private readonly LogicFactory _logicFactory;
 
@@ -25,6 +25,18 @@ namespace CryptoMarket_API.Controllers
             var transaction = _logicFactory.GetTransactionLogic().AddTransaction(transactionDTO);
 
             return transaction;
+        }
+
+        [HttpGet()]
+        public List<TransactionDTO> GetTransactions(int q) {
+
+            q = (q == 0 ? 20 : q);
+
+            //HttpContext.Items["Wallet"];
+
+            var list = _logicFactory.GetTransactionLogic().GetTransactions(q);
+
+            return list;
         }
     }
 }

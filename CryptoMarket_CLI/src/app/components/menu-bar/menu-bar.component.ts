@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { DataService } from '../services/data-service.service';
+import { DataService } from '../../services/data-service.service';
 import { RouterModule } from '@angular/router';
-import { CommonService } from '../services/common.service';
+import { CommonService } from '../../services/common.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { ApiResponse } from '../models/api-response.model';
-import { User } from '../models/user.model';
+import { ApiResponse } from '../../models/api-response.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-menu-bar',

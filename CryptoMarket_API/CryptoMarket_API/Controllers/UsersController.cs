@@ -51,7 +51,6 @@ namespace CryptoMarket_API.Controllers
             int pageSize = filtros.GetValue<int>("PageNumber", -1);
 
             List<UserDTO> users = _logicFactory.GetUserLogic().GetUsers(nick, level, pageNumber, pageSize);
-
             return users;
         }
 

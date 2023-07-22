@@ -10,6 +10,8 @@ namespace Logic
 {
     public class LogicUtils
     {
+        public static string? CurrentWallet { get; set; }
+
         public static User DtoToUser(UserDTO user) {
             return new User {
                 Wallet = user.Wallet,

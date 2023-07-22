@@ -97,9 +97,14 @@ namespace Logic.Logics
             throw new NotImplementedException();
         }
 
-        public List<TransactionDTO> GetTransactions()
+        public List<TransactionDTO> GetTransactions(int q)
         {
-            throw new NotImplementedException();
+            var transactions = _repository.TransactionRepository().GetTransactions(LogicUtils.CurrentWallet!, q);
+
+            var transactionsDTO = transactions.ConvertAll( t => LogicUtils.TransactionToDto(t) );
+
+            return transactionsDTO;
+
         }
     }
 }

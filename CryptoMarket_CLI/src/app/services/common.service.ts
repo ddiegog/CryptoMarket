@@ -1,7 +1,7 @@
 import { Injectable  } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { last, map } from 'rxjs';
 import { DataService } from './data-service.service';
 import { ApiResponse } from '../models/api-response.model';
@@ -199,7 +199,15 @@ export class CommonService {
    
   }
 
+  private refreshTransactionDataSubject = new Subject<void>();
+  refreshData$ = this.refreshTransactionDataSubject.asObservable();
+
+  refreshTransactionsData(){
+    this.refreshTransactionDataSubject.next();
+  }
+
   private defaultUser() : User {
     return new User('','',0,'','',0);
   }
+
 }

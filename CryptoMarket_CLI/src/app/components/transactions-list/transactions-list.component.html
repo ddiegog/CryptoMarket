@@ -1,0 +1,25 @@
+<div class="transaction-container col-6 mx-auto" style=" margin-top: 110px; ">
+    <h4 class="text-center">Recent Transactions</h4>
+    <div class="table-responsive mt-4" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);">
+        <div *ngIf="!transactions.length" class="text-center">There are no results</div>
+        <table *ngIf="transactions.length" class="table table-hover">
+            <thead>
+                <tr style="color: #2C3E50;">
+                    <th>Destination</th>
+                    <th>Amount</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transaction of transactions.slice(0, showCount)">
+                    <td>{{transaction.toWallet}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction.message}}</td>
+                    <td>{{transaction.date | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button *ngIf="showCount <= transactions.length" (click)="changeShow()" class="btn btn-info">Show {{this.showCount == 10 ? 'more' : 'less'}}</button>
+</div>

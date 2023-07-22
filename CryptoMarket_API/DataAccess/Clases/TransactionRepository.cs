@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace DataAccess.Clases
         }
         public Transaction AddTransaction(Transaction transaction)
         {
-            Transaction trans = null;
+            Transaction trans = null!;
 
             using (var context = _context.CreateDbContext())
             {
@@ -35,9 +36,21 @@ namespace DataAccess.Clases
             throw new NotImplementedException();
         }
 
-        public List<Transaction> GetTransactions()
+        public List<Transaction> GetTransactions(string wallet, int q)
         {
-            throw new NotImplementedException();
+            var list = new List<Transaction>();
+
+            using (var context = _context.CreateDbContext())
+            {
+                list = context.Transactions
+                    .Where(t => t.FromWallet == wallet || t.ToWallet == wallet)
+                    .OrderByDescending(t => t.Id)
+                    .Take(q)
+                    .ToList();
+
+            }
+
+            return list;
         }
     }
 }

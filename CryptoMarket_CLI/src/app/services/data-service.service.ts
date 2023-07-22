@@ -14,6 +14,8 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  // ------------ User ---------------
+
   getUser( wallet : string): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.baseUrl}/users/${wallet}`)
   }
@@ -27,16 +29,30 @@ export class DataService {
     return this.http.post<ApiResponse>(`${this.baseUrl}/users/auth`, JSON.stringify(body));
   }
 
-  checkTokenValidity(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.baseUrl}/auth/verify`);
+  getBalance(wallet: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/users/balance/${wallet}`);
   }
+
+  // ------------ End user ---------------
+
+  // ------------ Transaction ---------------
 
   addTransaction(transaction: Transaction): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${this.baseUrl}/Transactions`, JSON.stringify(transaction));
   }
 
-  getBalance(wallet: string): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.baseUrl}/Users/balance/${wallet}`);
+  getTransactions(q: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/Transactions?q=${q}`);
   }
+
+  // ------------ End transaction -------------
+
+
+  checkTokenValidity(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/auth/verify`);
+  }
+
+
+    
 
 }

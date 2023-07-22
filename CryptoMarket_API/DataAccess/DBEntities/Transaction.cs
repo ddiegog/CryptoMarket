@@ -17,7 +17,7 @@ public partial class Transaction
 
     public DateTime Date { get; set; }
 
-    public string Message { get; set; } = null!;
+    public string? Message { get; set; } = null!;
 
     public virtual User FromWalletNavigation { get; set; } = null!;
 

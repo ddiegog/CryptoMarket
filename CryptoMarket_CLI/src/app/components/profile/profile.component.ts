@@ -1,9 +1,9 @@
 import { Component, OnInit  } from '@angular/core';
-import { User } from '../models/user.model';
-import { DataService } from '../services/data-service.service';
+import { User } from '../../models/user.model';
+import { DataService } from '../../services/data-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ApiResponse } from '../models/api-response.model';
-import { CommonService } from '../services/common.service';
+import { ApiResponse } from '../../models/api-response.model';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-profile',

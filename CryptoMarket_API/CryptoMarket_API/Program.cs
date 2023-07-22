@@ -1,4 +1,5 @@
 using CryptoMarket_API.ApiResponse;
+using CryptoMarket_API.Middleware;
 using DataAccess.DBEntities;
 using Logic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -66,6 +67,8 @@ var app = builder.Build();
 //    app.UseSwagger();
 //    app.UseSwaggerUI();
 //}
+
+app.UseMiddleware<UserRetrievalMiddleware>();
 
 app.UseHttpsRedirection();
 
