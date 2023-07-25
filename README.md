@@ -3,7 +3,7 @@
 <p>OtterMints is a next-generation NFT marketplace enabling users to seamlessly login, buy, sell, and transfer NFT tokens. It provides a vibrant platform for discovering unique digital assets and includes a selection of interactive NFT games, creating a whole new level of engagement.</p>
 
 <p align="center">
-  <img width="500px" src="https://cdn.fbsbx.com/v/t59.2708-21/359672558_686412046816831_8620539212856670851_n.gif?_nc_cat=108&ccb=1-7&_nc_sid=041f46&_nc_ohc=sj_6OwrPM4cAX-uTx-b&_nc_ht=cdn.fbsbx.com&oh=03_AdR0e3obbv9su44-ncqMdj8J0YuScTkVDyacKregY_hGlA&oe=64AEBC47" alt="OtterMints Photo">
+  <img width="500px" src="https://i.ibb.co/0sX3wxQ/ottermints.jpg" alt="OtterMints Photo">
 </p>
 
 <h2>Key Features</h2>
@@ -25,5 +25,3 @@
 </ol>
 
 <p>Welcome to OtterMints – we're excited to have you in our community, pushing the boundaries of what's possible with NFTs.</p>
-
-

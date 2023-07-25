@@ -5,7 +5,7 @@
         <table *ngIf="transactions.length" class="table table-hover">
             <thead>
                 <tr style="color: #2C3E50;">
-                    <th>Destination</th>
+                    <th style="width: 390px;">Destination</th>
                     <th>Amount</th>
                     <th>Message</th>
                     <th>Date</th>
@@ -16,7 +16,7 @@
                 <tr *ngFor="let transaction of transactions.slice(0, showCount)">
                     <td>{{transaction.toWallet}}</td>
                     <td>{{transaction.amount}}</td>
-                    <td>{{transaction.message}}</td>
+                    <td style="overflow: hidden; text-overflow: ellipsis; max-width: 190px">{{transaction.message}}</td>
                     <td>{{transaction.date | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td>{{transaction.fromWallet == wallet ? "Sended" : "Received"}}</td>
                 </tr>

@@ -33,14 +33,13 @@ export class TransactionsListComponent implements OnInit {
         return;
       }
       
-      this.transactions = response.data;debugger
-
+      this.transactions = response.data; 
+      
     });
   }
 
   changeShow(): void {
     this.showCount = (this.showCount == 10 ? 20 : 10);
   }
-
 
 }
