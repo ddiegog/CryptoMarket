@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Transaction } from 'src/app/models/transaction.model';
 import { DataService } from 'src/app/services/data-service.service';
 import { CommonService } from 'src/app/services/common.service';
-import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-transactions-list',

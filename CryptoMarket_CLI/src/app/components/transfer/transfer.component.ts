@@ -67,8 +67,8 @@ export class TransferComponent implements OnInit {
       return false;
     }
 
-    if(this.amount < 0.001 || this.amount > 10000000){
-      this.commonService.openSnackBar('You can only transfer between 0.001 and 10000000 Otts', 'error');
+    if(this.amount < 0.0001 || this.amount > 10000000){
+      this.commonService.openSnackBar('You can only transfer between 0.0001 and 10000000 Otts', 'error');
       return false;
     }
 
